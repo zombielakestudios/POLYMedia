@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Hamburger Toggle: AURA Apex Architecture
      * ═══════════════════════════════════════════════
      */
-    const hamBtn  = document.getElementById('ham-btn');
+    const hamBtn = document.getElementById('ham-btn');
     const appMenu = document.getElementById('app-menu');
 
     function openMenu() {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const url = asset.getAttribute('data-bg');
                     if (url) {
                         asset.style.backgroundImage = `url('${url}')`;
-                        asset.removeAttribute('data-bg'); // Clean up
+                        asset.removeAttribute('data-bg');
                     }
                 });
 
@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lazySections.forEach(section => {
         sectionObserver.observe(section);
     });
+
 
     /**
      * ═══════════════════════════════════════════════

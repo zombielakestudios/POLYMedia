@@ -51,8 +51,8 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-    overflow-x: hidden;
-    /* Sella el scroll horizontal en toda la página */
+    overflow-x: clip;
+    /* clip ≠ hidden: no crea scroll container, permite sticky y fixed */
 }
 
 body {
@@ -61,8 +61,8 @@ body {
     color: var(--color-slate-100);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    /* Doble sello — previene overflows de elementos hijos */
+    overflow-x: clip;
+    /* Bloquea scroll horizontal sin romper position:sticky */
     width: 100%;
     max-width: 100vw;
     /* Ningún hijo puede sobrepasar el viewport */

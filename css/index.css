@@ -230,14 +230,17 @@
 
 /* --- Hero Section --- */
 .hero {
-    position: relative;
-    min-height: 90vh;
+    position: sticky;
+    /* Se queda clavado mientras la página pasa por encima */
+    top: 0;
+    z-index: 0;
+    /* Las secciones de servicios quedan encima (z-index > 0) */
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     padding: 10rem 1rem 5rem;
-    /* Top padding = header height (5rem) + extra breathing room */
     background-color: var(--color-bg-dark);
 }
 
@@ -675,6 +678,10 @@
 .service-panels {
     display: flex;
     flex-direction: column;
+    position: relative;
+    /* Necesario para que z-index funcione */
+    z-index: 1;
+    /* Desliza por encima del Hero sticky (z-index: 0) */
 }
 
 /* 
@@ -712,9 +719,9 @@
 /* Columna de imagen */
 .service-image {
     position: relative;
+    overflow: hidden;
     background-size: cover;
     background-position: center;
-    overflow: hidden;
 }
 
 /* --- Brand SVG Logo Grid: 3x2 puro, color único violeta oscuro --- */
