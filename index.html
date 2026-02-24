@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLYMedia | Impacto Digital de Alta Tensión</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Más que una agencia, somos tu equipo de creadores apasionados. Le ponemos alma y magia al mundo digital para que cada clic sea una experiencia inolvidable.">
+    <meta name="keywords" content="Diseño Web Cancún, Renders 3D, Branding, Agencia Marketing, Impacto Digital">
+    <meta name="author" content="POLYMedia">
+
+    <!-- Design System & Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <!-- Cursor Trail Canvas -->
+    <canvas id="cursor-trail"></canvas>
+    <div class="site-wrapper">
+        <!-- Main Navigation -->
+        <header class="header">
+            <div class="container">
+                <div class="logo-group" id="main-logo">
+                    <div class="logo-icon">
+                        <span class="icon">polymer</span>
+                    </div>
+                    <span class="logo-text">POLY<span class="text-primary">Media</span></span>
+                </div>
+
+                <!-- Hamburger Button -->
+                <button class="ham-btn" id="ham-btn" aria-label="Abrir menú" aria-expanded="false">
+                    <span class="ham-line"></span>
+                    <span class="ham-line"></span>
+                    <span class="ham-line"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Full Screen App Menu -->
+        <div class="app-menu" id="app-menu" aria-hidden="true">
+            <nav class="app-menu__nav">
+                <a href="#services" class="app-menu__link" data-close-menu>
+                    <span class="app-menu__num">01</span>
+                    <span class="app-menu__text">Servicios</span>
+                </a>
+                <a href="#process" class="app-menu__link" data-close-menu>
+                    <span class="app-menu__num">02</span>
+                    <span class="app-menu__text">Proceso</span>
+                </a>
+                <a href="#about" class="app-menu__link" data-close-menu>
+                    <span class="app-menu__num">03</span>
+                    <span class="app-menu__text">Nosotros</span>
+                </a>
+                <a href="#contact" class="app-menu__link" data-close-menu>
+                    <span class="app-menu__num">04</span>
+                    <span class="app-menu__text">Contacto</span>
+                </a>
+                <a href="#contact" class="app-menu__link app-menu__cta" data-close-menu>
+                    <span class="app-menu__text">Hablemos &nbsp;<span class="icon">arrow_forward</span></span>
+                </a>
+            </nav>
+            <div class="app-menu__footer">
+                <span>POLY<b>Media</b></span>
+                <span>© 2025</span>
+            </div>
+        </div>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-shapes">
+                    <div class="hero-shape shape-1"></div>
+                    <div class="hero-shape shape-2"></div>
+                </div>
+
+                <div class="hero-title-wrapper">
+                    <div class="title-row">
+                        <div style="position: relative; z-index: 5;">
+                            <span class="text-giant skew-1 shadow-primary anim-digital">PO</span>
+                            <span class="text-giant text-outline skew-2"
+                                style="position: absolute; right: -2rem; opacity: 0.3;">PO</span>
+                        </div>
+                        <div class="ly-box" style="position: relative; z-index: 10;">
+                            <span class="text-giant shadow-blue skew-3 anim-digital">LY!</span>
+                        </div>
+                    </div>
+
+                    <div class="impact-box">
+                        <div class="bg-vibrant-green uppercase font-black text-jumbo skew-4 anim-glitch"
+                            data-text="MEDIA" style="color: black; padding: 0 1rem; position: relative; z-index: 20;">
+                            MEDIA
+                        </div>
+                    </div>
+
+                    <div class="hero-sub">
+                        <div style="height: 1px; width: 6rem; background: var(--color-primary);"></div>
+                        <p>
+                            No solo diseñamos; le ponemos <span
+                                style="font-weight: 700; border-bottom: 4px solid var(--color-vibrant-orange);">alma y
+                                magia</span>.
+                            Más que una agencia, somos tu equipo de creadores apasionados haciendo que cada clic sea una
+                            experiencia inolvidable.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <div id="services" class="service-panels">
+                <!-- 01 Branding -->
+                <section class="service-section bg-vibrant-purple lazy-section">
+                    <div class="service-content">
+                        <span style="font-weight: 700; opacity: 0.5;">01 / IDENTIDAD</span>
+                        <h2 class="text-jumbo" style="font-size: clamp(3rem, 14vw, 5rem); color: white;">BRAND<br><span
+                                class="text-outline">IDENTITY</span></h2>
+                        <p style="color: white; margin: 2rem 0; font-weight: 500;">
+                            Construímos marcas con alma y propósito. Desde el logo hasta la narrativa visual completa
+                            que conecta con tu audiencia.
+                        </p>
+                        <a href="#" class="font-black uppercase" style="color: white;">Ver Identidades <span
+                                class="icon">arrow_forward</span></a>
+                    </div>
+                    <div class="brand-grid">
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-06.svg" alt="BAAK Suites" class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-07.svg" alt="CREA Diseño y Construcción"
+                                class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-08.svg" alt="ZCALE" class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-10.svg" alt="Agricola" class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-09.svg" alt="JAKUX" class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-11.svg" alt="Logo 11" class="brand-svg">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 02 Rendering -->
+                <section class="service-section reverse bg-vibrant-orange lazy-section">
+                    <div class="service-content" style="text-align: right;">
+                        <span style="font-weight: 700; opacity: 0.5;">02 / VISUALIZACIÓN</span>
+                        <h2 class="text-jumbo" style="font-size: clamp(3rem, 14vw, 5rem); color: white;">3D<br><span
+                                class="text-outline">RENDER</span></h2>
+                        <p style="color: white; margin: 2rem 0; font-weight: 500;">
+                            Visualizaciones arquitectónicas fotorrealistas. Convertimos planos en sueños digitales para
+                            el mercado inmobiliario de lujo.
+                        </p>
+                        <a href="#" class="font-black uppercase">Ver Galería <span class="icon">arrow_back</span></a>
+                    </div>
+                    <div class="service-image" data-bg="assets/img/renders/render-0.jpeg">
+                    </div>
+                </section>
+
+                <!-- 03 Web Design -->
+                <section class="service-section bg-vibrant-blue lazy-section">
+                    <div class="service-content">
+                        <span style="font-weight: 700; opacity: 0.5;">03 / DESARROLLO</span>
+                        <h2 class="text-jumbo" style="font-size: clamp(3rem, 14vw, 5rem); color: white;"><span
+                                class="text-outline">WEB</span><br>DESIGN</h2>
+                        <p style="margin: 2rem 0;">
+                            Experiencias digitales de alta tensión. Sitios web rápidos y centrados en el usuario que
+                            dominan todas las pantallas.
+                        </p>
+                        <a href="#" class="font-black uppercase">Ver Proyectos <span
+                                class="icon">arrow_forward</span></a>
+                    </div>
+                    <div class="service-image" data-bg="assets/img/webdesing/webdesing-1.jpeg">
+                    </div>
+                </section>
+
+                <!-- 04 Laser Engraving -->
+                <section class="service-section reverse bg-vibrant-dark lazy-section">
+                    <div class="service-content" style="text-align: right;">
+                        <span style="font-weight: 700; opacity: 0.5;">04 / PRECISIÓN</span>
+                        <h2 class="text-jumbo" style="font-size: clamp(3rem, 14vw, 5rem); color: white;"><span
+                                class="text-outline">GRABADO</span><br>LÁSER</h2>
+                        <p style="margin: 2rem 0;">
+                            Personalización de alta precisión en diversos materiales. Madera, metal y acrílico con
+                            acabados de nivel industrial.
+                        </p>
+                        <a href="#" class="font-black uppercase">Explorar Grabados <span
+                                class="icon">arrow_back</span></a>
+                    </div>
+                    <div class="service-image"
+                        data-bg="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2070">
+                    </div>
+                </section>
+
+                <!-- 05 Vinyl Cutting -->
+                <section class="service-section bg-vibrant-green lazy-section">
+                    <div class="service-content">
+                        <span style="font-weight: 700; opacity: 0.5;">05 / ROTULACIÓN</span>
+                        <h2 class="text-jumbo" style="font-size: clamp(3rem, 14vw, 5rem); color: black;">CORTE<br><span
+                                class="text-outline" style="-webkit-text-stroke-color: black;">VINILO</span></h2>
+                        <p style="color: black; margin: 2rem 0; font-weight: 500;">
+                            Soluciones de rotulación vibrante para espacios y vehículos. Gráficos duraderos con corte de
+                            máxima precisión.
+                        </p>
+                        <a href="#" class="font-black uppercase" style="color: black;">Ver Proyectos <span
+                                class="icon">arrow_forward</span></a>
+                    </div>
+                    <div class="service-image"
+                        data-bg="https://images.unsplash.com/photo-1563206767-5b18f218e7de?auto=format&fit=crop&q=80&w=2069">
+                    </div>
+                </section>
+            </div>
+
+            <!-- Workflow Section -->
+            <section id="process" class="workflow-section lazy-section">
+                <div class="container">
+                    <div class="workflow-header">
+                        <span class="text-primary font-bold uppercase" style="letter-spacing: 0.2em;">Workflow</span>
+                        <h2 class="uppercase font-black" style="font-size: clamp(2.5rem, 8vw, 3.5rem); color: white;">El
+                            Proceso</h2>
+                    </div>
+
+                    <div class="workflow-grid">
+                        <div class="workflow-step step-discovery">
+                            <div class="step-icon">
+                                <span class="icon" style="font-size: 2.5rem; color: white;">search</span>
+                                <div class="step-number">1</div>
+                            </div>
+                            <h4 class="uppercase font-black" style="font-size: 1.5rem; margin-bottom: 1rem;">Discovery
+                            </h4>
+                            <p style="font-size: 0.875rem; color: var(--color-slate-400);">Investigación profunda de tus
+                                metas, audiencia y mercado.</p>
+                        </div>
+
+                        <div class="workflow-step step-strategy" style="margin-top: 2rem;">
+                            <div class="step-icon">
+                                <span class="icon" style="font-size: 2.5rem; color: white;">lightbulb</span>
+                                <div class="step-number">2</div>
+                            </div>
+                            <h4 class="uppercase font-black" style="font-size: 1.5rem; margin-bottom: 1rem;">Strategy
+                            </h4>
+                            <p style="font-size: 0.875rem; color: var(--color-slate-400);">Desarrollo de una hoja de
+                                ruta personalizada y dirección creativa.</p>
+                        </div>
+
+                        <div class="workflow-step step-creation">
+                            <div class="step-icon">
+                                <span class="icon" style="font-size: 2.5rem; color: white;">brush</span>
+                                <div class="step-number">3</div>
+                            </div>
+                            <h4 class="uppercase font-black" style="font-size: 1.5rem; margin-bottom: 1rem;">Creation
+                            </h4>
+                            <p style="font-size: 0.875rem; color: var(--color-slate-400);">Diseñadores y desarrolladores
+                                dan vida a la estrategia.</p>
+                        </div>
+
+                        <div class="workflow-step step-launch" style="margin-top: 2rem;">
+                            <div class="step-icon">
+                                <span class="icon" style="font-size: 2.5rem; color: black;">rocket_launch</span>
+                                <div class="step-number">4</div>
+                            </div>
+                            <h4 class="uppercase font-black" style="font-size: 1.5rem; margin-bottom: 1rem;">Launch</h4>
+                            <p style="font-size: 0.875rem; color: var(--color-slate-400);">Despliegue y soporte continuo
+                                para mantener tu marca volando.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Magic Section (Lazy Loaded) -->
+            <section class="faq-section lazy-section" data-html-src="components/faq.html">
+                <div style="min-height: 400px; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: var(--color-slate-400); font-size: 1.2rem; animation: pulse 2s infinite;">Cargando
+                        respuestas mágicas...</p>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section id="contact" class="cta-section lazy-section">
+                <div class="cta-bg"
+                    data-bg="https://lh3.googleusercontent.com/aida-public/AB6AXuBgn8uP7yTLYg2BcpoyzFq9Oc5ZvUOjLQSPlgCJCTX9prOKbOWCHiEl4ueWPx3_auoT1dTz7Z1yArMAprRInox3n-omYf6QRGqaa8i9mUmpkLqQrm3fFXXjkM1XzDHE24RrA7LB-Zi8GiUo5mvwlehSyrCxBe4qnZ7YSlDQw_eRsfKnDrDuLYz8l4nGqutIJifR6V3LyZms_hQm3CuLIEduKDLpbrOF61MGhM93HmFKgd5frmEq30567KN3MP7YmUaG7puCOT9z82Y">
+                </div>
+                <div class="container" style="position: relative; z-index: 10;">
+                    <h2 class="uppercase font-black"
+                        style="font-size: clamp(3rem, 10vw, 4rem); color: white; line-height: 1;">
+                        ¿Listo para <span
+                            style="background: white; color: black; padding: 0 0.5rem; transform: rotate(-2deg); display: inline-block;">Elevar</span><br>tu
+                        Marca?
+                    </h2>
+                    <p
+                        style="font-size: 1.25rem; margin-top: 2rem; max-width: 40rem; margin-left: auto; margin-right: auto; font-weight: 500;">
+                        Ya sea que necesites un nuevo universo web, darle alma a tu marca o visualizaciones 3D
+                        que enamoren, en POLYMedia creamos con auténtica pasión para ti.
+                    </p>
+                    <button class="btn-cta">Inicia tu Proyecto</button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 4rem;">
+                    <div>
+                        <div class="logo-group" style="margin-bottom: 1.5rem;">
+                            <span class="icon text-primary">polymer</span>
+                            <span class="logo-text" style="color: white;">POLYMedia</span>
+                        </div>
+                        <p style="font-size: 0.875rem;">Tu equipo incansable de creadores apasionados.
+                            Poniéndole magia a cada proyecto digital desde 2024.</p>
+                    </div>
+                    <div>
+                        <h5 class="uppercase font-bold"
+                            style="color: white; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                            Servicios</h5>
+                        <ul style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+                            <li><a href="#">Rendering 3D</a></li>
+                            <li><a href="#">Diseño Web</a></li>
+                            <li><a href="#">Branding</a></li>
+                            <li><a href="#">Grabado Láser</a></li>
+                            <li><a href="#">Corte de Vinilo</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="uppercase font-bold"
+                            style="color: white; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                            Contacto</h5>
+                        <ul style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; display: flex; justify-content: space-between;">
+                    <p>&copy; 2024 POLYMedia. Todos los derechos reservados.</p>
+                    <div style="display: flex; gap: 1.5rem;">
+                        <a href="#">Privacidad</a>
+                        <a href="#">Términos</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
