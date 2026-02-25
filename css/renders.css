@@ -276,6 +276,17 @@
     border-radius: 0.5rem;
     cursor: pointer;
     background-color: var(--color-slate-900);
+
+    /* Estado inicial: invisible y ligeramente desplazada */
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Estado visible: el JS agrega esta clase */
+.gallery-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .gallery-card__img {
