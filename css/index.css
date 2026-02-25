@@ -399,38 +399,17 @@
 /* ── Layout móvil: columna única para que los títulos no se corten ── */
 @media (max-width: 640px) {
     .service-section {
-        grid-template-columns: 1fr;
-        height: auto;
-        direction: ltr;
         overflow: visible;
-    }
-
-    .service-section.reverse>* {
-        direction: ltr;
     }
 
     .service-content {
-        padding: 2rem 1.5rem;
         overflow: visible;
-    }
-
-    .service-image {
-        height: 220px;
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .brand-grid {
-        height: 280px;
-        width: 100%;
-        overflow: hidden;
     }
 
     .service-content h2 {
-        font-size: clamp(1.8rem, 7.5vw, 3.5rem) !important;
+        font-size: clamp(1rem, 5vw, 2.5rem) !important;
         line-height: 0.9 !important;
-        overflow: visible;
-        white-space: normal;
+        word-break: keep-all;
     }
 }
 
