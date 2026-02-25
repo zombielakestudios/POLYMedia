@@ -396,12 +396,32 @@
     }
 }
 
-/* ── Títulos de módulos de servicios: protección anti-corte en 320px ── */
-@media (max-width: 480px) {
+/* ── Layout móvil: columna única para que los títulos no se corten ── */
+@media (max-width: 640px) {
+    .service-section {
+        grid-template-columns: 1fr;
+        height: auto;
+        direction: ltr;
+        /* Reset rtl para que el orden DOM sea siempre texto→imagen */
+    }
+
+    .service-section.reverse>* {
+        direction: ltr;
+    }
+
+    .service-content {
+        padding: 2rem 1.5rem;
+        overflow: visible;
+    }
+
+    .service-image {
+        height: 220px;
+        width: 100%;
+    }
+
     .service-content h2 {
-        font-size: clamp(1.4rem, 7vw, 3rem) !important;
+        font-size: clamp(2.5rem, 12vw, 4rem) !important;
         line-height: 0.9 !important;
-        letter-spacing: -0.04em !important;
     }
 }
 
