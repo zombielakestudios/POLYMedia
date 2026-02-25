@@ -368,16 +368,26 @@
     display: block;
     width: clamp(18rem, 80vw, 64rem);
     height: auto;
-    filter: drop-shadow(-6px 6px 0 #2b3de2);
-    /* sombra azul como el original */
+    position: relative;
+    z-index: 5;
+}
+
+/* Ghost translucido: replica el text-outline original */
+.hero-svg-poly-ghost {
+    opacity: 0.2;
+    position: absolute;
+    top: 0.4rem;
+    left: 1.5rem;
+    pointer-events: none;
+    z-index: 4;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
 }
 
 .hero-svg-media {
     display: block;
     width: clamp(14rem, 65vw, 52rem);
     height: auto;
-    filter: invert(1);
-    /* SVG es blanco, sobre verde necesita ser negro */
+    /* Blanco sobre rosa: no necesita invert */
 }
 
 
