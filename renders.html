@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renders 3D | POLYMedia — Visualización Arquitectónica Premium</title>
+
+    <!-- SEO -->
+    <meta name="description"
+        content="Galería de renders arquitectónicos fotorrealistas de POLYMedia. Visualizaciones 3D de alto impacto para el mercado inmobiliario de lujo.">
+    <meta name="keywords" content="Renders 3D, Visualización Arquitectónica, CGI, POLYMedia, Cancún">
+    <meta name="author" content="POLYMedia">
+
+    <!-- Design System -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/renders.css">
+</head>
+
+<body>
+    <canvas id="cursor-trail"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo-group" id="main-logo" aria-label="Volver al inicio">
+                <div class="logo-icon">
+                    <span class="icon">polymer</span>
+                </div>
+                <span class="logo-text">POLY<span class="text-primary">Media</span></span>
+            </a>
+            <a href="index.html" class="back-link">
+                <span class="icon">arrow_back</span>
+                <span>Inicio</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="renders-hero">
+            <div class="renders-hero__bg" style="background-image: url('assets/img/renders/render-9.jpeg');"></div>
+            <div class="renders-hero__overlay"></div>
+            <div class="renders-hero__content">
+                <span class="renders-hero__label">02 / VISUALIZACIÓN</span>
+                <h1 class="renders-hero__title">
+                    <span class="title-block">RENDERS</span>
+                    <span class="title-block title-outline">3D</span>
+                </h1>
+                <p class="renders-hero__sub">
+                    Convertimos planos en <strong>sueños digitales</strong>.<br>
+                    Visualizaciones fotorrealistas para el mercado inmobiliario de lujo.
+                </p>
+                <a href="#gallery" class="renders-hero__cta">
+                    <span>Ver Galería</span>
+                    <span class="icon">south</span>
+                </a>
+            </div>
+            <div class="scroll-indicator" aria-hidden="true">
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Gallery Counter -->
+        <div class="gallery-meta">
+            <div class="container">
+                <span class="gallery-meta__count"><strong>10</strong> proyectos</span>
+                <div class="gallery-meta__line"></div>
+                <span class="gallery-meta__tag">Renderizado Fotorrealista</span>
+            </div>
+        </div>
+
+        <!-- Masonry Gallery -->
+        <section id="gallery" class="renders-gallery">
+            <div class="gallery-grid">
+
+                <!-- Render 0 — Wide hero card -->
+                <article class="gallery-card card--wide" data-index="0">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-0.jpeg');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">01</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Residencia Tropical</h2>
+                            <p class="gallery-card__meta">Interior · Sala principal</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-0.jpeg" data-title="Residencia Tropical"
+                            data-meta="Interior · Sala principal">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 1 -->
+                <article class="gallery-card" data-index="1">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-1.jpg');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">02</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Suite de Lujo</h2>
+                            <p class="gallery-card__meta">Interior · Recámara master</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-1.jpg" data-title="Suite de Lujo"
+                            data-meta="Interior · Recámara master">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 2 -->
+                <article class="gallery-card" data-index="2">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-2.png');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">03</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Terraza Panorámica</h2>
+                            <p class="gallery-card__meta">Exterior · Vista aérea</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-2.png" data-title="Terraza Panorámica"
+                            data-meta="Exterior · Vista aérea">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 3 — Tall card -->
+                <article class="gallery-card card--tall" data-index="3">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-3.png');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">04</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Fachada Contemporánea</h2>
+                            <p class="gallery-card__meta">Exterior · Vista frontal</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-3.png" data-title="Fachada Contemporánea"
+                            data-meta="Exterior · Vista frontal">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 4 -->
+                <article class="gallery-card" data-index="4">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-4.png');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">05</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Jardín Privado</h2>
+                            <p class="gallery-card__meta">Exterior · Área verde</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-4.png" data-title="Jardín Privado"
+                            data-meta="Exterior · Área verde">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 5 — Wide -->
+                <article class="gallery-card card--wide" data-index="5">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-5.jpeg');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">06</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Cocina Gourmet</h2>
+                            <p class="gallery-card__meta">Interior · Área de cocina</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-5.jpeg" data-title="Cocina Gourmet"
+                            data-meta="Interior · Área de cocina">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 6 -->
+                <article class="gallery-card" data-index="6">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-6.jpeg');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">07</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Alberca Infinity</h2>
+                            <p class="gallery-card__meta">Exterior · Área de piscina</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-6.jpeg" data-title="Alberca Infinity"
+                            data-meta="Exterior · Área de piscina">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 7 -->
+                <article class="gallery-card" data-index="7">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-7.jpeg');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">08</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Sala de Estar</h2>
+                            <p class="gallery-card__meta">Interior · Living room</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-7.jpeg" data-title="Sala de Estar"
+                            data-meta="Interior · Living room">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 8 — Tall -->
+                <article class="gallery-card card--tall" data-index="8">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-8.jpeg');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">09</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Pasillo Arquitectónico</h2>
+                            <p class="gallery-card__meta">Interior · Circulación</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-8.jpeg" data-title="Pasillo Arquitectónico"
+                            data-meta="Interior · Circulación">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 9 -->
+                <article class="gallery-card" data-index="9">
+                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-9.jpeg');">
+                    </div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">10</span>
+                        <div class="gallery-card__info">
+                            <h2 class="gallery-card__title">Vista Nocturna</h2>
+                            <p class="gallery-card__meta">Exterior · Iluminación</p>
+                        </div>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-9.jpeg" data-title="Vista Nocturna"
+                            data-meta="Exterior · Iluminación">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- CTA Bottom -->
+        <section class="renders-cta">
+            <div class="container">
+                <p class="renders-cta__label">¿Tienes un proyecto?</p>
+                <h2 class="renders-cta__title">Convierte tus planos<br><span class="text-accent">en realidad
+                        visual</span></h2>
+                <a href="index.html#contact" class="renders-cta__btn">
+                    Inicia tu Proyecto
+                    <span class="icon">arrow_forward</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer mínimo -->
+    <footer class="renders-footer">
+        <div class="container">
+            <span>© 2026 <strong>POLYMedia</strong>. Todos los derechos reservados.</span>
+            <a href="index.html" class="service-link" style="font-size:0.875rem;">
+                <span class="icon">arrow_back</span> Volver al inicio
+            </a>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+        <button class="lightbox__close" id="lb-close" aria-label="Cerrar">
+            <span class="icon">close</span>
+        </button>
+        <button class="lightbox__nav lightbox__prev" id="lb-prev" aria-label="Anterior">
+            <span class="icon">chevron_left</span>
+        </button>
+        <button class="lightbox__nav lightbox__next" id="lb-next" aria-label="Siguiente">
+            <span class="icon">chevron_right</span>
+        </button>
+        <div class="lightbox__img-wrap">
+            <img class="lightbox__img" id="lb-img" src="" alt="">
+        </div>
+        <div class="lightbox__caption" id="lb-caption">
+            <strong id="lb-title"></strong>
+            <span id="lb-meta"></span>
+        </div>
+        <div class="lightbox__counter" id="lb-counter"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/renders.js"></script>
+</body>
+
+</html>
