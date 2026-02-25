@@ -402,7 +402,7 @@
         grid-template-columns: 1fr;
         height: auto;
         direction: ltr;
-        /* Reset rtl para que el orden DOM sea siempre texto→imagen */
+        overflow: visible;
     }
 
     .service-section.reverse>* {
@@ -417,11 +417,20 @@
     .service-image {
         height: 220px;
         width: 100%;
+        overflow: hidden;
+    }
+
+    .brand-grid {
+        height: 280px;
+        width: 100%;
+        overflow: hidden;
     }
 
     .service-content h2 {
-        font-size: clamp(2.5rem, 12vw, 4rem) !important;
+        font-size: clamp(1.8rem, 7.5vw, 3.5rem) !important;
         line-height: 0.9 !important;
+        overflow: visible;
+        white-space: normal;
     }
 }
 
