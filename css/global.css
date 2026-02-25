@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Metropolis:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 :root {
@@ -18,7 +18,7 @@
     --color-slate-900: #0f172a;
 
     /* Typography */
-    --font-main: 'Metropolis', sans-serif;
+    --font-main: 'Barlow', sans-serif;
 
     /* Spacing & Borders */
     --radius-sm: 0.125rem;

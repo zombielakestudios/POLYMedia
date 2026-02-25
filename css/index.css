@@ -376,7 +376,7 @@
 }
 
 .text-jumbo {
-    font-size: clamp(3.2rem, 18vw, 4.5rem);
+    font-size: clamp(2.2rem, 14vw, 4.5rem);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -0.05em;
@@ -940,18 +940,15 @@
 .lazy-section {
     position: relative;
     opacity: 0;
-    transform: translateY(60px) scale(0.98);
-    filter: blur(10px);
-    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 1s ease-out;
-    will-change: opacity, transform, filter;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
 }
 
 .lazy-section.is-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
+    transform: translateY(0);
 }
 
 /* Stagger effects for children */
