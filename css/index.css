@@ -741,6 +741,19 @@
     background-position: center;
 }
 
+/* Links CTA dentro de las secciones de servicios — flecha alineada con el texto */
+.service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.service-link .icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
 /* --- Brand SVG Logo Grid: 3x2 puro, color único violeta oscuro --- */
 .brand-grid {
     display: grid;
