@@ -24,6 +24,27 @@
     justify-content: space-between;
 }
 
+/* Logo: icono cuadrado + texto en línea */
+.logo-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.125rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: white;
+}
+
 
 /* ── Hero ── */
 .renders-hero {
