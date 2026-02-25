@@ -363,6 +363,24 @@
     line-height: 0.85;
 }
 
+/* ── SVGs reemplazando texto gigante del Hero ── */
+.hero-svg-poly {
+    display: block;
+    width: clamp(18rem, 80vw, 64rem);
+    height: auto;
+    filter: drop-shadow(-6px 6px 0 #2b3de2);
+    /* sombra azul como el original */
+}
+
+.hero-svg-media {
+    display: block;
+    width: clamp(14rem, 65vw, 52rem);
+    height: auto;
+    filter: invert(1);
+    /* SVG es blanco, sobre verde necesita ser negro */
+}
+
+
 @media (min-width: 640px) {
     .text-giant {
         font-size: 14rem;
