@@ -132,3 +132,20 @@ ul {
 .font-light {
     font-weight: 300;
 }
+
+/* ── SVG Logo components ── */
+/* Símbolo dentro del cuadro rojo */
+.logo-icon-svg {
+    width: 80%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Wordmark: reemplaza el texto POLYMedia */
+.logo-wordmark {
+    height: 1.1rem;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
