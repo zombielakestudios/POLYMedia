@@ -7,6 +7,9 @@
     <title>Renders 3D | POLYMedia — Visualización Arquitectónica Premium</title>
     <link rel="icon" type="image/svg+xml" href="assets/svg/logos/favicon.svg">
 
+    <!-- Preload: solo la imagen del Hero (primera visible en pantalla) -->
+    <link rel="preload" as="image" href="assets/img/renders/render-9.jpeg" fetchpriority="high">
+
     <!-- SEO -->
     <meta name="description"
         content="Galería de renders arquitectónicos fotorrealistas de POLYMedia. Visualizaciones 3D de alto impacto para el mercado inmobiliario de lujo.">
@@ -40,7 +43,8 @@
     <main>
         <!-- Hero Section -->
         <section class="renders-hero">
-            <div class="renders-hero__bg" style="background-image: url('assets/img/renders/render-9.jpeg');"></div>
+            <!-- Hero BG: carga inmediata (primera imagen visible) -->
+            <div class="renders-hero__bg" data-bg="assets/img/renders/render-9.jpeg" id="hero-bg"></div>
             <div class="renders-hero__overlay"></div>
             <div class="renders-hero__content">
                 <span class="renders-hero__label">02 / VISUALIZACIÓN</span>
@@ -77,8 +81,7 @@
 
                 <!-- Render 0 — Wide hero card -->
                 <article class="gallery-card card--wide" data-index="0">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-0.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-0.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">01</span>
                         <div class="gallery-card__info">
@@ -95,8 +98,7 @@
 
                 <!-- Render 1 -->
                 <article class="gallery-card" data-index="1">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-1.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-1.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">02</span>
                         <div class="gallery-card__info">
@@ -113,8 +115,7 @@
 
                 <!-- Render 2 — Fachada vertical: card tall -->
                 <article class="gallery-card card--tall" data-index="2">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-2.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-2.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">03</span>
                         <div class="gallery-card__info">
@@ -131,8 +132,7 @@
 
                 <!-- Render 3 — Paisaje 4K: card wide -->
                 <article class="gallery-card card--wide" data-index="3">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-3.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-3.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">04</span>
                         <div class="gallery-card__info">
@@ -149,8 +149,7 @@
 
                 <!-- Render 4 -->
                 <article class="gallery-card" data-index="4">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-4.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-4.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">05</span>
                         <div class="gallery-card__info">
@@ -167,8 +166,7 @@
 
                 <!-- Render 5 — Interior vertical: card tall -->
                 <article class="gallery-card card--tall" data-index="5">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-5.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-5.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">06</span>
                         <div class="gallery-card__info">
@@ -185,8 +183,7 @@
 
                 <!-- Render 6 -->
                 <article class="gallery-card" data-index="6">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-6.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-6.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">07</span>
                         <div class="gallery-card__info">
@@ -203,8 +200,7 @@
 
                 <!-- Render 7 -->
                 <article class="gallery-card" data-index="7">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-7.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-7.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">08</span>
                         <div class="gallery-card__info">
@@ -221,8 +217,7 @@
 
                 <!-- Render 8 — Pergola paisaje: regular -->
                 <article class="gallery-card" data-index="8">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-8.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-8.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">09</span>
                         <div class="gallery-card__info">
@@ -239,8 +234,7 @@
 
                 <!-- Render 9 -->
                 <article class="gallery-card" data-index="9">
-                    <div class="gallery-card__img" style="background-image: url('assets/img/renders/render-9.jpeg');">
-                    </div>
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-9.jpeg"></div>
                     <div class="gallery-card__overlay">
                         <span class="gallery-card__num">10</span>
                         <div class="gallery-card__info">

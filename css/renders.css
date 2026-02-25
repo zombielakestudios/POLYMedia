@@ -277,16 +277,28 @@
     cursor: pointer;
     background-color: var(--color-slate-900);
 
+    /* Skeleton shimmer mientras carga la imagen */
+    background-image: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            rgba(255, 255, 255, 0.08) 50%,
+            rgba(255, 255, 255, 0.03) 100%);
+    background-size: 200% 100%;
+    animation: card-shimmer 1.6s ease infinite;
+
     /* Estado inicial: invisible y ligeramente desplazada */
     opacity: 0;
     transform: translateY(28px);
+    /* La transición y el delay los maneja el JS dinámicamente */
     transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
 }
 
 /* Estado visible: el JS agrega esta clase */
 .gallery-card.is-visible {
     opacity: 1;
     transform: translateY(0);
+    animation: none;
+    /* Detenemos el shimmer al ser visible */
 }
 
 .gallery-card__img {
@@ -294,7 +306,19 @@
     inset: 0;
     background-size: cover;
     background-position: center;
+    background-color: transparent;
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+@keyframes card-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 .gallery-card:hover .gallery-card__img {

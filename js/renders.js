@@ -1,33 +1,127 @@
 /**
- * ═══════════════════════════════════════════════
- * renders.js — Galería Lightbox Engine
- * POLYMedia Apex Architecture
- * ═══════════════════════════════════════════════
+ * ═══════════════════════════════════════════════════════════
+ *  renders.js — Galería Lightbox Engine v2.0 (Apex Mobile)
+ *  POLYMedia — AURA Architecture
+ *  Fix: imágenes visibles desde el primer frame, sin necesitar
+ *       scroll ni touch. Lazy-load real con pre-fetch anticipado.
+ * ═══════════════════════════════════════════════════════════
  */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ── Datos de imágenes desde los botones del DOM ──
-    const zoomBtns = document.querySelectorAll('.gallery-card__zoom');
-    const cards    = document.querySelectorAll('.gallery-card');
-    const lightbox = document.getElementById('lightbox');
-    const lbImg    = document.getElementById('lb-img');
-    const lbTitle  = document.getElementById('lb-title');
-    const lbMeta   = document.getElementById('lb-meta');
-    const lbCounter= document.getElementById('lb-counter');
-    const lbClose  = document.getElementById('lb-close');
-    const lbPrev   = document.getElementById('lb-prev');
-    const lbNext   = document.getElementById('lb-next');
+    // ─────────────────────────────────────────────────────────
+    // 1. HERO BG — Carga inmediata, sin esperar nada
+    // ─────────────────────────────────────────────────────────
+    const heroBg = document.getElementById('hero-bg');
+    if (heroBg) {
+        const heroSrc = heroBg.getAttribute('data-bg');
+        if (heroSrc) {
+            heroBg.style.backgroundImage = `url('${heroSrc}')`;
+            heroBg.removeAttribute('data-bg');
+        }
+    }
 
-    // Construimos el dataset de imágenes desde botones
+    // ─────────────────────────────────────────────────────────
+    // 2. LAZY-BG LOADER — Carga imágenes de tarjetas al entrar
+    //    al viewport. rootMargin de 300px para pre-cargar ANTES
+    //    de que sean visibles (anticipación real).
+    // ─────────────────────────────────────────────────────────
+    const bgObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const imgDiv = entry.target.querySelector('[data-bg]');
+            if (imgDiv) {
+                imgDiv.style.backgroundImage = `url('${imgDiv.getAttribute('data-bg')}')`;
+                imgDiv.removeAttribute('data-bg');
+            }
+            obs.unobserve(entry.target);
+        });
+    }, {
+        rootMargin: '300px 0px 300px 0px', // Pre-carga 300px ANTES de ser visible
+        threshold: 0
+    });
+
+    // ─────────────────────────────────────────────────────────
+    // 3. REVEAL ANIMATION — Aparece con fade+slide al entrar
+    //    Sin tocar, sin scroll extra. Se dispara en el primer
+    //    frame si ya están en pantalla.
+    // ─────────────────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const card = entry.target;
+            const index = parseInt(card.getAttribute('data-index') ?? '0', 10);
+            // Stagger suave: máx 0.3s de delay para no hacer esperar
+            const delay = Math.min(index * 0.06, 0.3);
+            card.style.transitionDelay = `${delay}s`;
+            card.classList.add('is-visible');
+            obs.unobserve(card);
+        });
+    }, {
+        rootMargin: '0px 0px -20px 0px', // Umbral mínimo: aparece casi de inmediato
+        threshold: 0
+    });
+
+    const cards = document.querySelectorAll('.gallery-card');
+
+    cards.forEach(card => {
+        bgObserver.observe(card);
+        revealObserver.observe(card);
+    });
+
+    // ─────────────────────────────────────────────────────────
+    // 4. FORCE REVEAL — Polyfill para el primer frame en móvil.
+    //    Algunos browsers móviles no disparan el Observer hasta
+    //    el primer scroll. Esto lo resuelve sin necesitar touch.
+    // ─────────────────────────────────────────────────────────
+    function forceRevealVisible() {
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            // Si está dentro del viewport + margen de 300px
+            if (rect.top < window.innerHeight + 300) {
+                // Cargar imagen si aún tiene data-bg
+                const imgDiv = card.querySelector('[data-bg]');
+                if (imgDiv) {
+                    imgDiv.style.backgroundImage = `url('${imgDiv.getAttribute('data-bg')}')`;
+                    imgDiv.removeAttribute('data-bg');
+                }
+                // Revelar tarjeta
+                const index = parseInt(card.getAttribute('data-index') ?? '0', 10);
+                const delay = Math.min(index * 0.06, 0.3);
+                card.style.transitionDelay = `${delay}s`;
+                card.classList.add('is-visible');
+            }
+        });
+    }
+
+    // Disparar en el primer frame disponible (antes de cualquier interacción)
+    requestAnimationFrame(() => {
+        forceRevealVisible();
+        // Segundo frame como seguro adicional (algunos móviles son lentos en el primer rAF)
+        requestAnimationFrame(forceRevealVisible);
+    });
+
+    // ─────────────────────────────────────────────────────────
+    // 5. LIGHTBOX ENGINE
+    // ─────────────────────────────────────────────────────────
+    const zoomBtns = document.querySelectorAll('.gallery-card__zoom');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbTitle = document.getElementById('lb-title');
+    const lbMeta = document.getElementById('lb-meta');
+    const lbCounter = document.getElementById('lb-counter');
+    const lbClose = document.getElementById('lb-close');
+    const lbPrev = document.getElementById('lb-prev');
+    const lbNext = document.getElementById('lb-next');
+
+    // Dataset de imágenes desde los botones del DOM
     const images = Array.from(zoomBtns).map(btn => ({
-        src  : btn.getAttribute('data-src'),
+        src: btn.getAttribute('data-src'),
         title: btn.getAttribute('data-title'),
-        meta : btn.getAttribute('data-meta'),
+        meta: btn.getAttribute('data-meta'),
     }));
 
     let currentIndex = 0;
 
-    // ── Abrir lightbox ──
     function openLightbox(index) {
         currentIndex = index;
         updateLightbox();
@@ -37,35 +131,32 @@ document.addEventListener('DOMContentLoaded', () => {
         lbClose.focus();
     }
 
-    // ── Cerrar lightbox ──
     function closeLightbox() {
         lightbox.classList.remove('is-open');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
     }
 
-    // ── Actualizar contenido del lightbox ──
     function updateLightbox() {
         const data = images[currentIndex];
         lbImg.style.opacity = '0';
         lbImg.style.transform = 'scale(0.95)';
 
         setTimeout(() => {
-            lbImg.src   = data.src;
-            lbImg.alt   = data.title;
+            lbImg.src = data.src;
+            lbImg.alt = data.title;
             lbTitle.textContent = data.title;
-            lbMeta.textContent  = data.meta;
+            lbMeta.textContent = data.meta;
             lbCounter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(images.length).padStart(2, '0')}`;
 
             lbImg.onload = () => {
-                lbImg.style.opacity   = '1';
+                lbImg.style.opacity = '1';
                 lbImg.style.transform = 'scale(1)';
                 lbImg.style.transition = 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1)';
             };
         }, 150);
     }
 
-    // ── Navegación ──
     function goNext() {
         currentIndex = (currentIndex + 1) % images.length;
         updateLightbox();
@@ -76,17 +167,15 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLightbox();
     }
 
-    // ── Event listeners ──
-
-    // Clic en botón zoom
+    // Botón zoom
     zoomBtns.forEach((btn, i) => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', e => {
             e.stopPropagation();
             openLightbox(i);
         });
     });
 
-    // Clic en cualquier parte de la card también abre el lightbox
+    // Clic en card abre lightbox
     cards.forEach((card, i) => {
         card.addEventListener('click', () => openLightbox(i));
     });
@@ -95,69 +184,30 @@ document.addEventListener('DOMContentLoaded', () => {
     lbNext.addEventListener('click', goNext);
     lbPrev.addEventListener('click', goPrev);
 
-    // Clic fuera de la imagen cierra
-    lightbox.addEventListener('click', (e) => {
+    // Clic fuera cierra
+    lightbox.addEventListener('click', e => {
         if (e.target === lightbox) closeLightbox();
     });
 
     // Teclado
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
         if (!lightbox.classList.contains('is-open')) return;
-        if (e.key === 'Escape')      closeLightbox();
-        if (e.key === 'ArrowRight')  goNext();
-        if (e.key === 'ArrowLeft')   goPrev();
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') goNext();
+        if (e.key === 'ArrowLeft') goPrev();
     });
 
-    // Touch swipe para móvil
+    // Swipe táctil en el lightbox
     let touchStartX = 0;
-    lightbox.addEventListener('touchstart', (e) => {
+    lightbox.addEventListener('touchstart', e => {
         touchStartX = e.touches[0].clientX;
     }, { passive: true });
 
-    lightbox.addEventListener('touchend', (e) => {
+    lightbox.addEventListener('touchend', e => {
         const delta = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(delta) < 40) return; // Ignorar taps accidentales
+        if (Math.abs(delta) < 40) return;
         delta < 0 ? goNext() : goPrev();
     });
 
-    // ── Reveal de cards al hacer scroll (IntersectionObserver) ──
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    cards.forEach((card, i) => {
-        card.style.opacity         = '0';
-        card.style.transform       = 'translateY(30px)';
-        card.style.transition      = `opacity 0.7s ease ${i * 0.06}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${i * 0.06}s`;
-        revealObserver.observe(card);
-    });
-
-    // Estado visible
-    document.querySelectorAll('.gallery-card.is-visible, .gallery-card').forEach(card => {
-        card.addEventListener('transitionend', () => {
-            if (card.classList.contains('is-visible')) {
-                card.style.opacity   = '';
-                card.style.transform = '';
-            }
-        });
-    });
-
-    // Disparar visible para las cards ya en viewport
-    setTimeout(() => {
-        cards.forEach(card => {
-            const rect = card.getBoundingClientRect();
-            if (rect.top < window.innerHeight) {
-                card.classList.add('is-visible');
-                card.style.opacity   = '1';
-                card.style.transform = 'translateY(0)';
-            }
-        });
-    }, 100);
-
-    console.log('POLYMedia Renders Engine: Active ✓');
+    console.log('POLYMedia Renders Engine v2.0: Active ✓');
 });
