@@ -307,8 +307,8 @@
     gap: 0;
     position: relative;
     z-index: 30;
-    transform: rotate(-6deg) translate(-15%, -10%);
-    /* Inclinación de bloque completo hacia la izquierda, lo subimos un 10% y movemos un 15% a la izquierda en móvil */
+    transform: rotate(-6deg) translate(-10%, -18%);
+    /* Ajuste fino: poquito a la izquierda y arriba */
 }
 
 .title-row>div:first-child {
