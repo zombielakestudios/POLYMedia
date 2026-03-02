@@ -250,6 +250,271 @@ document.addEventListener('DOMContentLoaded', () => {
         animationId = requestAnimationFrame(animate);
     }
 
+    /**
+     * ═══════════════════════════════════════════════
+     * CONTACT MODAL (Glassmorphism)
+     * ═══════════════════════════════════════════════
+     */
+    const contactModal = document.getElementById('contactModal');
+    const openContactModalBtn = document.getElementById('openContactModalBtn');
+
+    // Función para abrir modal
+    function openContactModal() {
+        if (!contactModal) return;
+        contactModal.classList.add('is-open');
+        contactModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden'; // Bloquear scroll
+    }
+
+    // Función para cerrar modal
+    function closeContactModal() {
+        if (!contactModal) return;
+        contactModal.classList.remove('is-open');
+        contactModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = ''; // Restaurar scroll
+    }
+
+    // Event listener para abrir
+    if (openContactModalBtn) {
+        openContactModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openContactModal();
+        });
+    }
+
+    // Event listeners para cerrar
+    if (contactModal) {
+        const closeTriggers = contactModal.querySelectorAll('[data-close-modal]');
+        closeTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                // Al validar con e.target === trigger evitábamos que cerrara si se daba click al <span class="icon"> dentro del botón. 
+                // Usando e.currentTarget en su lugar permitimos que todo el botón (incluyendo sus hijos) dispare el cierre.
+                // Sin embargo, si es el overlay, sí queremos que sea estricto para no cerrar el modal al hacer click en el contenido del modal.
+                if (trigger.classList.contains('contact-modal-overlay')) {
+                    if (e.target === trigger) {
+                        closeContactModal();
+                    }
+                } else {
+                    // Es el botón de cerrar (la X)
+                    closeContactModal();
+                }
+            });
+        });
+
+        // Cerrar con Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && contactModal.classList.contains('is-open')) {
+                closeContactModal();
+            }
+        });
+    }
+
+    /**
+     * ═══════════════════════════════════════════════
+     * FORM VALIDATION & PREMIUM ALERTS
+     * ═══════════════════════════════════════════════
+     */
+    const contactForm = document.getElementById('projectContactForm');
+    const premiumAlertModal = document.getElementById('premiumAlertModal');
+    const premiumAlertMessage = document.getElementById('premiumAlertMessage');
+    const successAlertModal = document.getElementById('successAlertModal');
+
+    function openPremiumAlert(message) {
+        if (!premiumAlertModal || !premiumAlertMessage) return;
+        premiumAlertMessage.textContent = message;
+        premiumAlertModal.classList.add('is-open');
+        premiumAlertModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closePremiumAlert() {
+        if (!premiumAlertModal) return;
+        premiumAlertModal.classList.remove('is-open');
+        premiumAlertModal.setAttribute('aria-hidden', 'true');
+    }
+
+    function openSuccessAlert() {
+        if (!successAlertModal) return;
+        successAlertModal.classList.add('is-open');
+        successAlertModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeSuccessAlert() {
+        if (!successAlertModal) return;
+        successAlertModal.classList.remove('is-open');
+        successAlertModal.setAttribute('aria-hidden', 'true');
+    }
+
+    if (premiumAlertModal) {
+        // Cierra la alerta con cualquier click en el overlay o el botón "Entendido"
+        const alertCloseTriggers = premiumAlertModal.querySelectorAll('[data-close-alert]');
+        alertCloseTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                if (e.target === trigger) {
+                    closePremiumAlert();
+                }
+            });
+        });
+
+        // Cierra alerta con Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && premiumAlertModal.classList.contains('is-open')) {
+                closePremiumAlert();
+            }
+        });
+    }
+
+    // Listeners Alerta de Éxito
+    if (successAlertModal) {
+        const successCloseTriggers = successAlertModal.querySelectorAll('[data-close-success]');
+        successCloseTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                if (trigger.classList.contains('premium-alert-overlay')) {
+                    if (e.target === trigger) {
+                        closeSuccessAlert();
+                    }
+                } else {
+                    closeSuccessAlert();
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && successAlertModal.classList.contains('is-open')) {
+                closeSuccessAlert();
+            }
+        });
+    }
+
+    if (contactForm) {
+        // --- Country Selector y Validación de Teléfono Numérico ---
+        const telefonoInput = document.getElementById('contactTelefono');
+        const selectedCountry = document.getElementById('selectedCountry');
+        const countryDropdown = document.getElementById('countryDropdown');
+        const countrySelect = document.getElementById('countrySelectContainer');
+        const countryCodeInput = document.getElementById('countryCodeInput');
+
+        if (telefonoInput) {
+            // Validar que solo se ingresen números y controlar longitud base a E.164 (15 máx)
+            telefonoInput.addEventListener('input', function (e) {
+                let value = this.value.replace(/[^0-9]/g, '');
+                if (value.length > 15) {
+                    value = value.slice(0, 15);
+                }
+                this.value = value;
+            });
+        }
+
+        if (selectedCountry && countrySelect && countryDropdown) {
+            // Abrir/cerrar dropdown
+            selectedCountry.addEventListener('click', (e) => {
+                e.stopPropagation(); // Evitar que burbujeé al documento inmediatamente
+                countrySelect.classList.toggle('is-active');
+            });
+
+            // Cerrar si se da click afuera
+            document.addEventListener('click', (e) => {
+                if (!countrySelect.contains(e.target)) {
+                    countrySelect.classList.remove('is-active');
+                }
+            });
+
+            // Cambiar país seleccionado
+            const countryOptions = countryDropdown.querySelectorAll('li');
+            countryOptions.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const code = option.getAttribute('data-code');
+                    const flag = option.getAttribute('data-flag');
+
+                    if (countryCodeInput) countryCodeInput.value = code;
+
+                    // Solo actualizamos el interior, manteniendo la estructura
+                    selectedCountry.innerHTML = `
+                        <img src="assets/svg/flags/${flag}" alt="Selected Flag" class="flag-icon">
+                        <span class="country-code">${code}</span>
+                        <span class="icon" style="font-size: 1rem;">expand_more</span>
+                    `;
+
+                    countrySelect.classList.remove('is-active');
+                });
+            });
+        }
+
+        // Remover clases de error (-invalid) tan pronto el usuario interactúe con el field
+        const inputs = contactForm.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('input-invalid', 'checkbox-invalid');
+            });
+            input.addEventListener('change', () => {
+                input.classList.remove('input-invalid', 'checkbox-invalid');
+            });
+        });
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Detenemos el envío nativo HTML
+
+            let hasFieldErrors = false;
+            let hasPrivacyError = false;
+
+            // Recabamos todos los campos que tengan atributo "[required]"
+            const requiredFields = contactForm.querySelectorAll('[required]');
+
+            requiredFields.forEach(field => {
+                if (field.type === 'checkbox') {
+                    if (!field.checked) {
+                        field.classList.add('checkbox-invalid');
+                        hasPrivacyError = true;
+                    } else {
+                        field.classList.remove('checkbox-invalid');
+                    }
+                } else {
+                    if (!field.value.trim()) {
+                        field.classList.add('input-invalid');
+                        hasFieldErrors = true;
+                    } else {
+                        field.classList.remove('input-invalid');
+                    }
+                }
+            });
+
+            if (hasFieldErrors || hasPrivacyError) {
+                // Mensaje dinámico según lo que falte, priorizando los datos
+                if (hasFieldErrors) {
+                    openPremiumAlert('Ups! te hace falta llenar unos datos para tu misión.');
+                } else if (hasPrivacyError) {
+                    openPremiumAlert('Ups! No has aceptado nuestro acuerdo de privacidad.');
+                }
+                return; // Cortamos el flujo
+            }
+
+            // Si llegamos aquí, la validación fue un éxito "Fallo Cero"
+            const submitBtn = contactForm.querySelector('.btn-submit');
+            const originalHTML = submitBtn.innerHTML;
+
+            // Simulación de envío premium (Feedback al usuario)
+            submitBtn.innerHTML = 'Enviando... <span class="icon">sync</span>';
+            submitBtn.style.pointerEvents = 'none';
+
+            setTimeout(() => {
+                submitBtn.innerHTML = 'Misión Exitosa <span class="icon">check_circle</span>';
+                submitBtn.style.background = '#00e5ff'; // Cambio radical azul turquesa
+                submitBtn.style.color = '#000';
+
+                setTimeout(() => {
+                    closeContactModal();
+                    contactForm.reset();
+                    // Restaurar botón al estado original
+                    submitBtn.innerHTML = originalHTML;
+                    submitBtn.style = '';
+
+                    // Disparamos la ventana de Misión Cumplida justo aquí!
+                    openSuccessAlert();
+                }, 2000); // 2 segundos antes de cerrar modal general y resetear
+            }, 1500); // 1.5s simulación de respuesta del server
+        });
+    }
+
     // Mouse event listeners & Drag-to-scroll (Apex Touch Simulation)
     let isDragging = false;
     let hasDragged = false;

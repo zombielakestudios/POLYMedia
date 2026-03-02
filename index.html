@@ -181,6 +181,23 @@
                     </div>
                 </section>
 
+                <!-- 04 App Development -->
+                <section class="service-section reverse bg-primary lazy-section">
+                    <div class="service-content" style="text-align: right;">
+                        <span style="font-weight: 700; opacity: 0.5;">04 / DESARROLLO MÓVIL</span>
+                        <h2 class="text-jumbo" style="font-size: clamp(2rem, 8vw, 5rem); color: white;">APP<br><span
+                                class="text-outline">DEVELOPMENT</span></h2>
+                        <p style="color: white; margin: 2rem 0; font-weight: 500;">
+                            Llevamos tu visión a la palma de la mano. Aplicaciones móviles intuitivas, rápidas y
+                            escalables para iOS y Android.
+                        </p>
+                        <a href="#" class="font-black uppercase service-link">Ver Proyectos <span
+                                class="icon">arrow_forward</span></a>
+                    </div>
+                    <div class="service-image" data-bg="assets/img/appdevelopment/app-1.jpg" data-parallax>
+                    </div>
+                </section>
+
             </div>
 
             <!-- Workflow Section -->
@@ -264,7 +281,7 @@
                         Ya sea que necesites un nuevo universo web, darle alma a tu marca o visualizaciones 3D
                         que enamoren, en POLYMedia creamos con auténtica pasión para ti.
                     </p>
-                    <button class="btn-cta">Inicia tu Proyecto</button>
+                    <button id="openContactModalBtn" class="btn-cta">Inicia tu Proyecto</button>
                 </div>
             </section>
         </main>
@@ -314,6 +331,130 @@
             </div>
         </footer>
     </div>
+
+    <!-- Modal de Contacto (Glassmorphism) -->
+    <div id="contactModal" class="contact-modal" aria-hidden="true">
+        <div class="contact-modal-overlay" data-close-modal></div>
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" data-close-modal aria-label="Cerrar modal">
+                <span class="icon">close</span>
+            </button>
+            <div class="contact-modal-header">
+                <h3 class="uppercase font-black" style="font-size: 2rem; color: white; line-height: 1.1;">
+                    Inicia tu <br><span class="text-primary">Proyecto</span>
+                </h3>
+                <p style="color: var(--color-slate-300); font-size: 0.9rem; margin-top: 0.5rem;">
+                    Déjanos tus datos y nos pondremos en contacto contigo a la velocidad de la luz.
+                </p>
+            </div>
+            <form class="contact-modal-form" id="projectContactForm" novalidate>
+                <div class="form-group">
+                    <label for="contactNombre">Nombre Completo</label>
+                    <input type="text" id="contactNombre" name="nombre" required placeholder="Ej. Elon Musk">
+                </div>
+                <div class="form-group">
+                    <label for="contactEmpresa">Empresa / Proyecto</label>
+                    <input type="text" id="contactEmpresa" name="empresa" placeholder="Ej. SpaceX">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group" style="position: relative; z-index: 50;">
+                        <label for="contactTelefono">Número (WhatsApp / Telegram)</label>
+                        <div class="phone-input-group">
+                            <div class="country-select" id="countrySelectContainer">
+                                <div class="selected-country" id="selectedCountry">
+                                    <img src="assets/svg/flags/mx.svg" alt="MX" class="flag-icon">
+                                    <span class="country-code">+52</span>
+                                    <span class="icon" style="font-size: 1rem;">expand_more</span>
+                                </div>
+                                <ul class="country-dropdown" id="countryDropdown">
+                                    <li data-code="+52" data-flag="mx.svg">
+                                        <img src="assets/svg/flags/mx.svg" alt="MX" class="flag-icon"> <span>México
+                                            (+52)</span>
+                                    </li>
+                                    <li data-code="+1" data-flag="us.svg">
+                                        <img src="assets/svg/flags/us.svg" alt="US" class="flag-icon"> <span>EUA /
+                                            Canadá (+1)</span>
+                                    </li>
+                                    <li data-code="+57" data-flag="co.svg">
+                                        <img src="assets/svg/flags/co.svg" alt="CO" class="flag-icon"> <span>Colombia
+                                            (+57)</span>
+                                    </li>
+                                    <li data-code="+54" data-flag="ar.svg">
+                                        <img src="assets/svg/flags/ar.svg" alt="AR" class="flag-icon"> <span>Argentina
+                                            (+54)</span>
+                                    </li>
+                                    <li data-code="+34" data-flag="es.svg">
+                                        <img src="assets/svg/flags/es.svg" alt="ES" class="flag-icon"> <span>España
+                                            (+34)</span>
+                                    </li>
+                                    <li data-code="+56" data-flag="cl.svg">
+                                        <img src="assets/svg/flags/cl.svg" alt="CL" class="flag-icon"> <span>Chile
+                                            (+56)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <input type="hidden" id="countryCodeInput" name="lada" value="+52">
+                            <input type="tel" id="contactTelefono" name="telefono" required placeholder="000 000 0000"
+                                maxlength="15" inputmode="numeric">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Correo Electrónico</label>
+                        <input type="email" id="contactEmail" name="email" required placeholder="elon@spacex.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contactServicio">Servicio de Interés Principal</label>
+                    <select id="contactServicio" name="servicio" required>
+                        <option value="" disabled selected>Selecciona una opción...</option>
+                        <option value="desarrollo_web">Desarrollo Web / Landing Page</option>
+                        <option value="app_movil">Desarrollo de App Móvil</option>
+                        <option value="branding">Branding e Identidad Corporativa</option>
+                        <option value="render_3d">Renders 3D / Arquitectura</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="contactMensaje">Breve descripción de lo que buscas</label>
+                    <textarea id="contactMensaje" name="mensaje" rows="3" required
+                        placeholder="Queremos llevar nuestra marca a Marte..."></textarea>
+                </div>
+                <div class="form-checkbox">
+                    <input type="checkbox" id="contactPrivacidad" name="privacidad" required>
+                    <label for="contactPrivacidad">
+                        He leído y acepto el <a href="privacidad.html" target="_blank" class="text-primary font-bold"
+                            style="text-decoration: underline;">Acuerdo de Privacidad</a>.
+                    </label>
+                </div>
+                <button type="submit" class="btn-submit uppercase font-black">Enviar Misión <span
+                        class="icon">rocket_launch</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Premium Alert Modal (Error Validations) -->
+    <div id="premiumAlertModal" class="premium-alert-modal" aria-hidden="true">
+        <div class="premium-alert-overlay" data-close-alert></div>
+        <div class="premium-alert-content">
+            <span class="icon premium-alert-icon">error</span>
+            <h4 class="uppercase font-black premium-alert-title">¡Espera!</h4>
+            <p id="premiumAlertMessage" class="premium-alert-message">Ups! te hace falta llenar unos datos.</p>
+            <button class="btn-alert-close" data-close-alert>Entendido</button>
+        </div>
+    </div>
+
+    <!-- Success Alert Modal (Misión Cumplida) -->
+    <div id="successAlertModal" class="premium-alert-modal success-modal" aria-hidden="true">
+        <div class="premium-alert-overlay" data-close-success></div>
+        <div class="premium-alert-content success-content">
+            <span class="icon premium-alert-icon success-icon">task_alt</span>
+            <h4 class="uppercase font-black premium-alert-title">¡Misión Cumplida!</h4>
+            <p class="premium-alert-message">¡Mensaje de la misión enviado con éxito!<br>En breve nos estaremos
+                comunicando contigo.</p>
+            <button class="btn-alert-close success-btn" data-close-success>Excelente</button>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
 </body>
 
