@@ -144,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             lbImg.src = data.src;
-            lbImg.alt = data.title;
-            lbTitle.textContent = data.title;
-            lbMeta.textContent = data.meta;
+            lbImg.alt = data.title || '';
+            lbTitle.textContent = data.title || '';
+            lbMeta.textContent = data.meta || '';
             lbCounter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(images.length).padStart(2, '0')}`;
 
             lbImg.onload = () => {

@@ -1,0 +1,92 @@
+/* 
+ * ═══════════════════════════════════════════════
+ * AURA Architect: FAQ Component CSS
+ * Lazy Loaded via Apex Intersection Observer
+ * ═══════════════════════════════════════════════
+ */
+
+.faq-section {
+    background-color: var(--color-bg-dark);
+    padding: 8rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.faq-accordion {
+    width: 100%;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    outline: none;
+    text-align: left;
+    transition: color 0.3s ease;
+}
+
+.faq-question {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .faq-question {
+        font-size: 1.5rem;
+    }
+}
+
+.faq-accordion:hover .faq-question,
+.faq-accordion.active .faq-question {
+    color: var(--color-vibrant-purple);
+}
+
+.faq-icon {
+    font-size: 2rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.faq-accordion.active .faq-icon {
+    transform: rotate(45deg);
+    color: var(--color-vibrant-purple);
+}
+
+.faq-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-panel p {
+    padding-bottom: 2rem;
+    color: var(--color-slate-300);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}

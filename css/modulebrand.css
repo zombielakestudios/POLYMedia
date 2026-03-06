@@ -1,0 +1,42 @@
+/* 
+ * ═══════════════════════════════════════════════
+ * AURA Architect: Module Specific CSS
+ * BRANDING MODULE
+ * Lazy Loaded via Apex Intersection Observer
+ * ═══════════════════════════════════════════════
+ */
+
+/* --- Brand SVG Logo Grid: 3x2 puro, color único violeta oscuro --- */
+.brand-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    /* 6 celdas iguales, sin fila CTA */
+    width: 100%;
+    height: 100%;
+}
+
+.brand-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 3vw, 2.5rem);
+    background-color: #0d0a1a;
+    /* Color ZCALE — morado profundo uniforme */
+    border: 1px solid rgba(168, 85, 247, 0.12);
+    transition: filter 0.35s ease;
+    overflow: hidden;
+}
+
+.brand-cell:hover {
+    filter: brightness(1.6);
+}
+
+.brand-svg {
+    width: 100%;
+    max-width: clamp(120px, 18vw, 280px);
+    /* Más grande ahora que tienen todo el espacio */
+    height: auto;
+    display: block;
+    object-fit: contain;
+}

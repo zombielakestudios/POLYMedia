@@ -76,6 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
+                // Lazy CSS injection (AURA Architecture - Fallo Cero)
+                const cssSrc = entry.target.getAttribute('data-css-src');
+                if (cssSrc && !document.querySelector(`link[href="${cssSrc}"]`)) {
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = cssSrc;
+                    document.head.appendChild(link);
+                }
+
                 // Lazy Html injection for dynamic sections (AURA Architecture)
                 const htmlSrc = entry.target.getAttribute('data-html-src');
                 if (htmlSrc && !entry.target.hasAttribute('data-loaded')) {
@@ -120,8 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * ═══════════════════════════════════════════════
      */
     const canvas = document.getElementById('cursor-trail');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas ? canvas.getContext('2d') : null;
 
     // POLYMedia brand colors palette
     const POLY_COLORS = [
@@ -138,13 +146,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMouseOnPage = false;
     let animationId = null;
 
+    // Detección de dispositivo táctil — desactivar cursor trail en móvil (M1)
+    const isTouchDevice = !window.matchMedia('(hover: hover)').matches;
+
     // Resize canvas to full window
     function resizeCanvas() {
+        if (!canvas) return;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    if (canvas && !isTouchDevice) {
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+    }
 
     // Particle class
     class Particle {
@@ -213,13 +227,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Spawn particles at mouse position
     function spawnParticles() {
-        if (!isMouseOnPage) return;
+        if (!isMouseOnPage || !canvas) return;
         // Solo instanciamos 1 partícula a la vez para que no se sature tan rápido
         particles.push(new Particle(mouseX, mouseY));
     }
 
     // Animation loop — 60fps target
     function animate() {
+        if (!ctx || !canvas) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         spawnParticles();
@@ -257,10 +272,25 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const contactModal = document.getElementById('contactModal');
     const openContactModalBtn = document.getElementById('openContactModalBtn');
+    const openContactModalMenuBtn = document.getElementById('openContactModalMenuBtn');
+
+    // Flag para cargar modals.css solo una vez (A5: Lazy CSS)
+    let modalsCssLoaded = false;
+    function ensureModalsCss() {
+        if (modalsCssLoaded) return;
+        if (!document.querySelector('link[href="css/modals.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'css/modals.css';
+            document.head.appendChild(link);
+        }
+        modalsCssLoaded = true;
+    }
 
     // Función para abrir modal
     function openContactModal() {
         if (!contactModal) return;
+        ensureModalsCss();
         contactModal.classList.add('is-open');
         contactModal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden'; // Bloquear scroll
@@ -277,6 +307,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener para abrir
     if (openContactModalBtn) {
         openContactModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openContactModal();
+        });
+    }
+
+    if (openContactModalMenuBtn) {
+        openContactModalMenuBtn.addEventListener('click', (e) => {
             e.preventDefault();
             openContactModal();
         });
@@ -516,6 +553,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Mouse event listeners & Drag-to-scroll (Apex Touch Simulation)
+    // M2: Scoped to .site-wrapper to avoid conflict with forms and interactive elements
+    const siteWrapper = document.querySelector('.site-wrapper');
     let isDragging = false;
     let hasDragged = false;
     let startY = 0;
@@ -545,26 +584,31 @@ document.addEventListener('DOMContentLoaded', () => {
         inertiaFrame = requestAnimationFrame(applyInertia);
     }
 
-    document.addEventListener('mousedown', (e) => {
-        if (e.button !== 0) return; // Solo clic izquierdo
-        isDragging = true;
-        hasDragged = false;
-        startY = e.clientY;
-        lastY = e.clientY;
-        velocityY = 0;
-        lastTime = performance.now();
+    if (siteWrapper) {
+        siteWrapper.addEventListener('mousedown', (e) => {
+            if (e.button !== 0) return; // Solo clic izquierdo
+            // No arrastrar si el target es interactivo (links, buttons, inputs)
+            const tag = e.target.tagName.toLowerCase();
+            if (['a', 'button', 'input', 'textarea', 'select', 'label'].includes(tag) || e.target.closest('a, button, input, textarea, select, label')) return;
+            isDragging = true;
+            hasDragged = false;
+            startY = e.clientY;
+            lastY = e.clientY;
+            velocityY = 0;
+            lastTime = performance.now();
 
-        // Cortamos cualquier inercia previa de tajo si toca pantalla de nuevo
-        if (inertiaFrame) cancelAnimationFrame(inertiaFrame);
+            // Cortamos cualquier inercia previa de tajo si toca pantalla de nuevo
+            if (inertiaFrame) cancelAnimationFrame(inertiaFrame);
 
-        // Prevenir selección de texto para mayor sensación de control nativo
-        document.body.style.userSelect = 'none';
-        // Apagamos el scroll-behavior smooth de CSS que hace la liga (Rubber-banding y lag)
-        document.documentElement.style.scrollBehavior = 'auto';
+            // Prevenir selección de texto para mayor sensación de control nativo
+            document.body.style.userSelect = 'none';
+            // Apagamos el scroll-behavior smooth de CSS que hace la liga (Rubber-banding y lag)
+            document.documentElement.style.scrollBehavior = 'auto';
 
-        // Feedback visual instantáneo al tocar cristal (Ripple)
-        ripples.push(new Ripple(e.clientX, e.clientY));
-    });
+            // Feedback visual instantáneo al tocar cristal (Ripple)
+            ripples.push(new Ripple(e.clientX, e.clientY));
+        });
+    }
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -631,22 +675,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Touch support mapping for mobile
-    document.addEventListener('touchstart', (e) => {
-        isMouseOnPage = true;
-        mouseX = e.touches[0].clientX;
-        mouseY = e.touches[0].clientY;
-        ripples.push(new Ripple(mouseX, mouseY));
-    }, { passive: true });
+    // Touch — solo escuchamos touch si hay canvas y NO es dispositivo táctil puro
+    if (!isTouchDevice) {
+        document.addEventListener('touchstart', (e) => {
+            isMouseOnPage = true;
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+            ripples.push(new Ripple(mouseX, mouseY));
+        }, { passive: true });
 
-    document.addEventListener('touchmove', (e) => {
-        mouseX = e.touches[0].clientX;
-        mouseY = e.touches[0].clientY;
-    }, { passive: true });
+        document.addEventListener('touchmove', (e) => {
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+        }, { passive: true });
 
-    document.addEventListener('touchend', () => {
-        isMouseOnPage = false;
-    });
+        document.addEventListener('touchend', () => {
+            isMouseOnPage = false;
+        });
+    }
 
-    // Run animation loop regardless of device type (so it works on touch too)
-    animate();
+    // Run animation loop ONLY on non-touch devices with canvas
+    if (canvas && !isTouchDevice) {
+        animate();
+    }
 });

@@ -1,0 +1,487 @@
+/* 
+ * ═══════════════════════════════════════════════
+ * AURA Architect: Modals & Contacts
+ * Modals, Alerts, Flags, Validations
+ * Lazy Loaded via Apex Intersection Observer
+ * ═══════════════════════════════════════════════
+ */
+
+/* --- Contact Modal (Glassmorphism) --- */
+.contact-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+}
+
+.contact-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease, visibility 0s linear 0s;
+}
+
+.contact-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(34, 16, 24, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.contact-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 5vw, 3rem);
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    /* Neon glow effect + shadow */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 40px rgba(204, 13, 95, 0.15);
+}
+
+.contact-modal.is-open .contact-modal-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+
+.contact-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--color-slate-400);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-base);
+    cursor: pointer;
+}
+
+.contact-modal-close:hover {
+    color: var(--color-white);
+    background: var(--color-primary);
+    transform: rotate(90deg);
+}
+
+.contact-modal-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.contact-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-slate-300);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.contact-modal-form input,
+.contact-modal-form select,
+.contact-modal-form textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.contact-modal-form input:focus,
+.contact-modal-form select:focus,
+.contact-modal-form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(204, 13, 95, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.contact-modal-form select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23cbd5e1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+}
+
+.contact-modal-form select option {
+    background: var(--color-bg-dark);
+    color: var(--color-white);
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.form-checkbox input[type="checkbox"] {
+    margin-top: 0.2rem;
+    accent-color: var(--color-primary);
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.form-checkbox label {
+    font-size: 0.85rem;
+    color: var(--color-slate-300);
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.btn-submit {
+    margin-top: 1rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
+}
+
+.btn-submit:hover {
+    background: #e6106c;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(204, 13, 95, 0.6);
+}
+
+/* Custom scrollbar for modal */
+.contact-modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.contact-modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.contact-modal-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.contact-modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* --- Premium Alert Modal (Validations) --- */
+.premium-alert-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.premium-alert-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+.premium-alert-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(34, 16, 24, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.premium-alert-content {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 40px rgba(0, 229, 255, 0.2);
+}
+
+.premium-alert-modal.is-open .premium-alert-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    transition-delay: 0.05s;
+}
+
+.premium-alert-icon {
+    font-size: 3.5rem;
+    color: #00e5ff;
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: pulseAlert 2s infinite;
+}
+
+@keyframes pulseAlert {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+        text-shadow: 0 0 20px rgba(0, 229, 255, 0.8);
+    }
+}
+
+.premium-alert-title {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.premium-alert-message {
+    color: var(--color-slate-300);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.btn-alert-close {
+    background: rgba(0, 229, 255, 0.1);
+    color: #00e5ff;
+    border: 1px solid rgba(0, 229, 255, 0.5);
+    padding: 0.8rem 2rem;
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.btn-alert-close:hover {
+    background: #00e5ff;
+    color: black;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* Invalid Form States (Turquoise Highlight) */
+.contact-modal-form .input-invalid {
+    border-color: #00e5ff !important;
+    box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.3) !important;
+    background: rgba(0, 229, 255, 0.05) !important;
+}
+
+.contact-modal-form .checkbox-invalid+label {
+    color: #00e5ff !important;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+/* --- Success Alert Modal (Misión Cumplida) --- */
+.success-modal .success-content {
+    border-color: rgba(204, 255, 0, 0.4);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 40px rgba(204, 255, 0, 0.2);
+}
+
+.success-modal .success-icon {
+    color: #ccff00;
+    animation: pulseSuccess 2s infinite;
+}
+
+@keyframes pulseSuccess {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+        text-shadow: 0 0 20px rgba(204, 255, 0, 0.8);
+    }
+}
+
+.success-modal .success-btn {
+    background: rgba(204, 255, 0, 0.1);
+    color: #ccff00;
+    border-color: rgba(204, 255, 0, 0.5);
+}
+
+.success-modal .success-btn:hover {
+    background: #ccff00;
+    color: black;
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.6);
+}
+
+/* --- Country Indicator (Flags Dropdown) --- */
+.phone-input-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+}
+
+.country-select {
+    position: relative;
+    width: 38%;
+    max-width: 140px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    color: var(--color-white);
+    transition: var(--transition-fast);
+    /* Forzamos height 100% para que empate con el input */
+    display: flex;
+    align-items: center;
+}
+
+.country-select.is-active {
+    border-color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 3px rgba(204, 13, 95, 0.2);
+}
+
+.selected-country {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.8rem;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+
+.flag-icon {
+    width: 24px;
+    height: 16px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-right: 6px;
+}
+
+.country-code {
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding-right: 4px;
+}
+
+.country-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 250px;
+    max-height: 200px;
+    overflow-y: auto;
+    background: rgba(10, 5, 8, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    list-style-type: none;
+    /* Asegura que no tenga viñetas */
+    padding-left: 0;
+}
+
+.country-select.is-active .country-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.country-dropdown li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--color-slate-300);
+    transition: background 0.2s, color 0.2s;
+    margin-bottom: 0;
+}
+
+.country-dropdown li:hover {
+    background: rgba(204, 13, 95, 0.1);
+    /* Hover Pink */
+    color: var(--color-primary);
+}
+
+/* Scrollbar for flag dropdown */
+.country-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.country-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.phone-input-group input[type="tel"] {
+    flex: 1;
+    /* Ocupa el resto del espacio */
+}

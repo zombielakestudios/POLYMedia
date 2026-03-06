@@ -3,47 +3,7 @@
    Apex Architecture v1.0
    ═══════════════════════════════════════════════════ */
 
-/* ── Header: logo izquierda / nav derecha ── */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 300;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(34, 16, 24, 0.9);
-    backdrop-filter: blur(12px);
-    height: 5rem;
-}
-
-.header .container {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Logo: icono cuadrado + texto en línea */
-.logo-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.125rem;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    flex-shrink: 0;
-}
-
-.logo-text {
-    font-size: 1.5rem;
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-    color: white;
-}
+/* Shared header styles now in global.css */
 
 
 /* ── Hero ── */
@@ -290,7 +250,6 @@
     transform: translateY(28px);
     /* La transición y el delay los maneja el JS dinámicamente */
     transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
 }
 
 /* Estado visible: el JS agrega esta clase */
@@ -308,7 +267,6 @@
     background-position: center;
     background-color: transparent;
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
 }
 
 @keyframes card-shimmer {
