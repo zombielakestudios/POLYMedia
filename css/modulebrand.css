@@ -23,7 +23,7 @@
     padding: clamp(1rem, 3vw, 2.5rem);
     background-color: #0d0a1a;
     /* Color ZCALE — morado profundo uniforme */
-    border: 1px solid rgba(168, 85, 247, 0.12);
+    border: 1px solid rgba(70, 55, 215, 0.12);
     transition: filter 0.35s ease;
     overflow: hidden;
 }

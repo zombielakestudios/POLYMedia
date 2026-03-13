@@ -49,7 +49,7 @@
     /* Neon glow effect + shadow */
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
         inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-        0 0 40px rgba(204, 13, 95, 0.15);
+        0 0 40px rgba(232, 45, 45, 0.15);
 }
 
 .contact-modal.is-open .contact-modal-content {
@@ -137,7 +137,7 @@
 .contact-modal-form textarea:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(204, 13, 95, 0.2);
+    box-shadow: 0 0 0 3px rgba(232, 45, 45, 0.2);
     background: rgba(0, 0, 0, 0.4);
 }
 
@@ -191,9 +191,9 @@
 }
 
 .btn-submit:hover {
-    background: #e6106c;
+    background: #c32424;
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px -10px rgba(204, 13, 95, 0.6);
+    box-shadow: 0 10px 20px -10px rgba(232, 45, 45, 0.6);
 }
 
 /* Custom scrollbar for modal */
@@ -397,7 +397,7 @@
 .country-select.is-active {
     border-color: var(--color-primary);
     background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 0 3px rgba(204, 13, 95, 0.2);
+    box-shadow: 0 0 0 3px rgba(232, 45, 45, 0.2);
 }
 
 .selected-country {
@@ -466,8 +466,8 @@
 }
 
 .country-dropdown li:hover {
-    background: rgba(204, 13, 95, 0.1);
-    /* Hover Pink */
+    background: rgba(232, 45, 45, 0.1);
+    /* Hover Red */
     color: var(--color-primary);
 }
 

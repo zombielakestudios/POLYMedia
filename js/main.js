@@ -133,11 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // POLYMedia brand colors palette
     const POLY_COLORS = [
-        '#cc0d5f', // Primary Pink
-        '#2b3de2', // Vibrant Blue
-        '#ff5e3a', // Vibrant Orange
+        '#e82d2d', // Primary Red
+        '#eeb428', // Vibrant Yellow (Old Blue)
+        '#379aba', // Vibrant Cyan (Old Orange)
         '#ccff00', // Vibrant Green
-        '#a855f7', // Vibrant Purple
+        '#4637d7', // Vibrant Deep Blue/Purple (Old Purple)
     ];
 
     let particles = [];
