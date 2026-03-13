@@ -391,34 +391,37 @@
     background-color: var(--color-bg-dark);
 }
 
-.hero-shapes {
+.hero-video-container {
     position: absolute;
     inset: 0;
+    z-index: 1;
     overflow: hidden;
+}
+
+.hero-video-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     pointer-events: none;
 }
 
-.hero-shape {
+.hero-satin-glass {
     position: absolute;
-    filter: blur(80px);
+    inset: 0;
+    /* Efecto Ultra-Satin Glass: desenfoque máximo + profundidad visual */
+    background: radial-gradient(circle at 50% 50%, rgba(30, 14, 20, 0.6) 0%, rgba(15, 7, 10, 0.9) 100%);
+    backdrop-filter: blur(80px) saturate(200%);
+    -webkit-backdrop-filter: blur(80px) saturate(200%);
+    z-index: 2;
 }
 
-.shape-1 {
-    top: 10%;
-    left: 5%;
-    width: 40vw;
-    height: 40vw;
-    background-color: rgba(43, 61, 226, 0.2);
-    transform: rotate(12deg) skewX(-12deg);
-}
-
-.shape-2 {
-    bottom: 10%;
-    right: 5%;
-    width: 35vw;
-    height: 35vw;
-    background-color: rgba(204, 13, 95, 0.2);
-    transform: rotate(-6deg) skewY(6deg);
+.hero-satin-glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" /></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" /></svg>');
+    opacity: 0.03; /* Ruido sutil para textura satinada */
+    pointer-events: none;
 }
 
 /* Titles */
