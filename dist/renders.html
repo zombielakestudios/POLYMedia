@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renders 3D | POLYMedia — Visualización Arquitectónica Premium</title>
+    <link rel="icon" type="image/svg+xml" href="assets/svg/logos/favicon.svg">
+
+    <!-- Preload: solo la imagen del Hero (primera visible en pantalla) -->
+    <link rel="preload" as="image" href="assets/img/renders/render-9.jpeg" fetchpriority="high">
+
+    <!-- SEO -->
+    <meta name="description"
+        content="Galería de renders arquitectónicos fotorrealistas de POLYMedia. Visualizaciones 3D de alto impacto para el mercado inmobiliario de lujo.">
+    <meta name="keywords" content="Renders 3D, Visualización Arquitectónica, CGI, POLYMedia, Cancún">
+    <meta name="author" content="POLYMedia">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Renders 3D | POLYMedia — Visualización Arquitectónica Premium">
+    <meta property="og:description" content="Galería de renders arquitectónicos fotorrealistas de alto impacto.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/img/renders/render-9.jpeg">
+    <meta property="og:locale" content="es_MX">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Renders 3D | POLYMedia">
+    <meta name="twitter:description" content="Visualizaciones arquitectónicas fotorrealistas de POLYMedia.">
+    <meta name="twitter:image" content="assets/img/renders/render-9.jpeg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@200;300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
+
+    <!-- Design System -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/renders.css">
+</head>
+
+<body>
+    <canvas id="cursor-trail"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo-group" id="main-logo" aria-label="Volver al inicio">
+                <div class="logo-icon">
+                    <img src="assets/svg/logos/logotipo%20polymedia-03.svg" alt="POLYMedia" class="logo-icon-svg">
+                </div>
+                <img src="assets/svg/logos/logotipo%20polymedia-01.svg" alt="POLYMedia" class="logo-wordmark">
+            </a>
+            <a href="index.html" class="back-link">
+                <span class="icon">arrow_back</span>
+                <span>Inicio</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="renders-hero">
+            <!-- Hero BG: carga inmediata (primera imagen visible) -->
+            <div class="renders-hero__bg" data-bg="assets/img/renders/render-9.jpeg" id="hero-bg"></div>
+            <div class="renders-hero__overlay"></div>
+            <div class="renders-hero__content">
+                <span class="renders-hero__label">02 / VISUALIZACIÓN</span>
+                <h1 class="renders-hero__title">
+                    <span class="title-block">RENDERS</span>
+                    <span class="title-block title-outline">3D</span>
+                </h1>
+                <p class="renders-hero__sub">
+                    Convertimos planos en <strong>sueños digitales</strong>.<br>
+                    Visualizaciones fotorrealistas para el mercado inmobiliario de lujo.
+                </p>
+                <a href="#gallery" class="renders-hero__cta">
+                    <span>Ver Galería</span>
+                    <span class="icon">south</span>
+                </a>
+            </div>
+            <div class="scroll-indicator" aria-hidden="true">
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Gallery Counter -->
+        <div class="gallery-meta">
+            <div class="container">
+                <span class="gallery-meta__count"><strong>10</strong> proyectos</span>
+                <div class="gallery-meta__line"></div>
+                <span class="gallery-meta__tag">Renderizado Fotorrealista</span>
+            </div>
+        </div>
+
+        <!-- Masonry Gallery -->
+        <section id="gallery" class="renders-gallery">
+            <div class="gallery-grid">
+
+                <!-- Render 0 — Wide hero card -->
+                <article class="gallery-card card--wide" data-index="0">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-0.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">01</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-0.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 1 -->
+                <article class="gallery-card" data-index="1">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-1.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">02</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-1.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 2 — Fachada vertical: card tall -->
+                <article class="gallery-card card--tall" data-index="2">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-2.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">03</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-2.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 3 — Paisaje 4K: card wide -->
+                <article class="gallery-card card--wide" data-index="3">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-3.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">04</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-3.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 4 -->
+                <article class="gallery-card" data-index="4">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-4.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">05</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-4.png">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 5 — Interior vertical: card tall -->
+                <article class="gallery-card card--tall" data-index="5">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-5.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">06</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-5.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 6 -->
+                <article class="gallery-card" data-index="6">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-6.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">07</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-6.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 7 -->
+                <article class="gallery-card" data-index="7">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-7.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">08</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-7.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 8 — Pergola paisaje: regular -->
+                <article class="gallery-card" data-index="8">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-8.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">09</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-8.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Render 9 -->
+                <article class="gallery-card" data-index="9">
+                    <div class="gallery-card__img" data-bg="assets/img/renders/render-9.jpeg"></div>
+                    <div class="gallery-card__overlay">
+                        <span class="gallery-card__num">10</span>
+                        <button class="gallery-card__zoom" aria-label="Ver imagen completa"
+                            data-src="assets/img/renders/render-9.jpeg">
+                            <span class="icon">open_in_full</span>
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- CTA Bottom -->
+        <section class="renders-cta">
+            <div class="container">
+                <p class="renders-cta__label">¿Tienes un proyecto?</p>
+                <h2 class="renders-cta__title">Convierte tus planos<br><span class="text-accent">en realidad
+                        visual</span></h2>
+                <a href="index.html#contact" class="renders-cta__btn">
+                    Inicia tu Proyecto
+                    <span class="icon">arrow_forward</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer mínimo -->
+    <footer class="renders-footer">
+        <div class="container">
+            <span>© 2026 <strong>POLYMedia</strong>. Todos los derechos reservados.</span>
+            <a href="index.html" class="service-link" style="font-size:0.875rem;">
+                <span class="icon">arrow_back</span> Volver al inicio
+            </a>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+        <button class="lightbox__close" id="lb-close" aria-label="Cerrar">
+            <span class="icon">close</span>
+        </button>
+        <button class="lightbox__nav lightbox__prev" id="lb-prev" aria-label="Anterior">
+            <span class="icon">chevron_left</span>
+        </button>
+        <button class="lightbox__nav lightbox__next" id="lb-next" aria-label="Siguiente">
+            <span class="icon">chevron_right</span>
+        </button>
+        <div class="lightbox__img-wrap">
+            <img class="lightbox__img" id="lb-img" src="" alt="">
+        </div>
+        <div class="lightbox__caption" id="lb-caption">
+            <strong id="lb-title"></strong>
+            <span id="lb-meta"></span>
+        </div>
+        <div class="lightbox__counter" id="lb-counter"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/renders.js"></script>
+</body>
+
+</html>

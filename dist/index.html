@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLYMedia | Impacto Digital de Alta Tensión</title>
+    <link rel="icon" type="image/svg+xml" href="assets/svg/logos/favicon.svg">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Más que una agencia, somos tu equipo de creadores apasionados. Le ponemos alma y magia al mundo digital para que cada clic sea una experiencia inolvidable.">
+    <meta name="keywords" content="Diseño Web Cancún, Renders 3D, Branding, Agencia Marketing, Impacto Digital">
+    <meta name="author" content="POLYMedia">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="POLYMedia | Impacto Digital de Alta Tensión">
+    <meta property="og:description"
+        content="Somos tu equipo de creadores apasionados. Diseño Web, Renders 3D, Branding y App Development.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/img/renders/render-0.jpeg">
+    <meta property="og:url" content="https://polymedia.mx">
+    <meta property="og:locale" content="es_MX">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="POLYMedia | Impacto Digital de Alta Tensión">
+    <meta name="twitter:description" content="Diseño Web, Renders 3D, Branding y App Development en Cancún.">
+    <meta name="twitter:image" content="assets/img/renders/render-0.jpeg">
+
+    <!-- Fonts (C4: migrated from CSS @import for faster parsing) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@200;300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
+
+    <!-- Design System & Styles -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
+    <!-- modals.css loaded dynamically when needed -->
+</head>
+
+<body>
+    <!-- Cursor Trail Canvas -->
+    <canvas id="cursor-trail"></canvas>
+    <div class="site-wrapper">
+        <!-- Main Navigation -->
+        <header class="header">
+            <div class="container">
+                <div class="logo-group" id="main-logo">
+                    <div class="logo-icon">
+                        <img src="assets/svg/logos/logotipo%20polymedia-03.svg" alt="POLYMedia" class="logo-icon-svg">
+                    </div>
+                    <img src="assets/svg/logos/logotipo%20polymedia-01.svg" alt="POLYMedia" class="logo-wordmark">
+                </div>
+
+                <!-- Hamburger Button -->
+                <nav aria-label="Menú principal">
+                    <button class="ham-btn" id="ham-btn" aria-label="Abrir menú" aria-expanded="false">
+                        <span class="ham-line"></span>
+                        <span class="ham-line"></span>
+                        <span class="ham-line"></span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Full Screen App Menu -->
+        <div class="app-menu" id="app-menu" aria-hidden="true">
+            <nav class="app-menu__nav">
+                <a href="#services" class="app-menu__link" data-close-menu>
+                    <span class="app-menu__num">01</span>
+                    <span class="app-menu__text">Servicios</span>
+                </a>
+                <a href="#process" class="app-menu__link" data-close-menu>
+                    <span class="app-menu__num">02</span>
+                    <span class="app-menu__text">Proceso</span>
+                </a>
+                <a href="#about" class="app-menu__link" data-close-menu>
+                    <span class="app-menu__num">03</span>
+                    <span class="app-menu__text">Nosotros</span>
+                </a>
+                <a href="#contact" class="app-menu__link" data-close-menu>
+                    <span class="app-menu__num">04</span>
+                    <span class="app-menu__text">Contacto</span>
+                </a>
+                <a href="#contact" id="openContactModalMenuBtn" class="app-menu__link app-menu__cta" data-close-menu>
+                    <span class="app-menu__text">Hablemos &nbsp;<span class="icon">arrow_forward</span></span>
+                </a>
+            </nav>
+            <div class="app-menu__footer">
+                <span>POLY<b>Media</b></span>
+                <span>© 2026</span>
+            </div>
+        </div>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-video-container">
+                    <video id="heroVideo" class="hero-video-bg" muted playsinline autoplay loop>
+                        <source src="assets/video/Polymedia-Animation_PingPong.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-satin-glass"></div>
+                </div>
+
+                <div class="hero-title-wrapper">
+                    <div class="title-row">
+                        <div class="hero-poly-wrap">
+                            <img src="assets/svg/logos/logo-poly.svg" alt="POLY"
+                                class="hero-svg-poly shadow-primary anim-digital">
+                            <!-- Ghost translucido como el outline original -->
+                            <img src="assets/svg/logos/logo-poly.svg" alt="" aria-hidden="true"
+                                class="hero-svg-poly hero-svg-poly-ghost">
+                        </div>
+                    </div>
+
+                    <div class="impact-box">
+                        <div class="bg-primary skew-4 impact-box__inner">
+                            <img src="assets/svg/logos/logo-media.svg" alt="MEDIA" class="hero-svg-media anim-digital">
+                        </div>
+                    </div>
+
+                    <div class="hero-sub">
+                        <div class="hero-divider"></div>
+                        <p>
+                            Más allá de la estética visual, <span class="hero-highlight">creamos
+                                estrategias</span>.
+                            Dejamos atrás la vieja idea de solo "hacer logos bonitos" para diseñar marcas sólidas que
+                            lideran,
+                            inspiran y venden.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <div id="services" class="service-panels">
+                <!-- 01 Branding -->
+                <section class="service-section bg-vibrant-purple lazy-section" data-css-src="css/modulebrand.css">
+                    <div class="service-content">
+                        <span class="service-label">01 / IDENTIDAD</span>
+                        <h2 class="text-jumbo service-title">BRAND<br><span class="text-outline">IDENTITY</span></h2>
+                        <p class="service-desc">
+                            Construímos marcas con alma y propósito. Desde el logo hasta la narrativa visual completa
+                            que conecta con tu audiencia.
+                        </p>
+                        <a href="#" class="font-black uppercase service-link text-white">Ver Identidades
+                            <span class="icon">arrow_forward</span></a>
+                    </div>
+                    <div class="brand-grid">
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-06.svg" alt="BAAK Suites" class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-07.svg" alt="CREA Diseño y Construcción"
+                                class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-08.svg" alt="ZCALE" class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-10.svg" alt="Agricola" class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-09.svg" alt="JAKUX" class="brand-svg">
+                        </div>
+                        <div class="brand-cell">
+                            <img src="assets/svg/logos/logos_web_polymedia-11.svg" alt="Logo 11" class="brand-svg">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 02 Rendering -->
+                <section class="service-section reverse bg-vibrant-orange lazy-section">
+                    <div class="service-content service-content--right">
+                        <span class="service-label">02 / VISUALIZACIÓN</span>
+                        <h2 class="text-jumbo service-title">3D<br><span class="text-outline">RENDER</span></h2>
+                        <p class="service-desc">
+                            Visualizaciones arquitectónicas fotorrealistas. Convertimos planos en sueños digitales para
+                            el mercado inmobiliario de lujo.
+                        </p>
+                        <a href="renders.html" class="font-black uppercase service-link">Ver Galería <span
+                                class="icon">arrow_forward</span></a>
+                    </div>
+                    <div class="service-image" data-bg="assets/img/renders/render-0.jpeg" data-parallax>
+                    </div>
+                </section>
+
+                <!-- 03 Web Design -->
+                <section class="service-section bg-vibrant-blue lazy-section">
+                    <div class="service-content">
+                        <span class="service-label">03 / DESARROLLO</span>
+                        <h2 class="text-jumbo service-title"><span class="text-outline">WEB</span><br>DESIGN</h2>
+                        <p class="service-desc--inherit">
+                            Experiencias digitales de alta tensión. Sitios web rápidos y centrados en el usuario que
+                            dominan todas las pantallas.
+                        </p>
+                        <a href="#" class="font-black uppercase service-link">Ver Proyectos <span
+                                class="icon">arrow_forward</span></a>
+                    </div>
+                    <div class="service-image" data-bg="assets/img/webdesing/webdesing-1.jpeg" data-parallax>
+                    </div>
+                </section>
+
+                <!-- 04 App Development -->
+                <section class="service-section reverse bg-primary lazy-section">
+                    <div class="service-content service-content--right">
+                        <span class="service-label">04 / DESARROLLO MÓVIL</span>
+                        <h2 class="text-jumbo service-title">APP<br><span class="text-outline">DEVELOPMENT</span></h2>
+                        <p class="service-desc">
+                            Llevamos tu visión a la palma de la mano. Aplicaciones móviles intuitivas, rápidas y
+                            escalables para iOS y Android.
+                        </p>
+                        <a href="#" class="font-black uppercase service-link">Ver Proyectos <span
+                                class="icon">arrow_forward</span></a>
+                    </div>
+                    <div class="service-image" data-bg="assets/img/appdevelopment/app-1.jpg" data-parallax>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Workflow Section -->
+            <section id="process" class="workflow-section lazy-section">
+                <div class="container">
+                    <div class="workflow-header">
+                        <span class="text-primary font-bold uppercase workflow-label">Workflow</span>
+                        <h2 class="uppercase font-black workflow-title">El
+                            Proceso</h2>
+                    </div>
+
+                    <div class="workflow-grid">
+                        <div class="workflow-step step-discovery">
+                            <div class="step-icon">
+                                <span class="icon step-icon__symbol">search</span>
+                                <div class="step-number">1</div>
+                            </div>
+                            <h4 class="uppercase font-black step-title">Discovery
+                            </h4>
+                            <p class="step-desc">Investigación profunda de tus
+                                metas, audiencia y mercado.</p>
+                        </div>
+
+                        <div class="workflow-step step-strategy workflow-step--offset">
+                            <div class="step-icon">
+                                <span class="icon step-icon__symbol">lightbulb</span>
+                                <div class="step-number">2</div>
+                            </div>
+                            <h4 class="uppercase font-black step-title">Strategy
+                            </h4>
+                            <p class="step-desc">Desarrollo de una hoja de
+                                ruta personalizada y dirección creativa.</p>
+                        </div>
+
+                        <div class="workflow-step step-creation">
+                            <div class="step-icon">
+                                <span class="icon step-icon__symbol">brush</span>
+                                <div class="step-number">3</div>
+                            </div>
+                            <h4 class="uppercase font-black step-title">Creation
+                            </h4>
+                            <p class="step-desc">Diseñadores y desarrolladores
+                                dan vida a la estrategia.</p>
+                        </div>
+
+                        <div class="workflow-step step-launch workflow-step--offset">
+                            <div class="step-icon">
+                                <span class="icon step-icon__symbol">rocket_launch</span>
+                                <div class="step-number">4</div>
+                            </div>
+                            <h4 class="uppercase font-black step-title">Launch</h4>
+                            <p class="step-desc">Despliegue y soporte continuo
+                                para mantener tu marca volando.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Magic Section (Lazy Loaded) -->
+            <section class="faq-section lazy-section" data-html-src="components/faq.html" data-css-src="css/faq.css">
+                <div class="faq-loader">
+                    <p class="faq-loader__text">Cargando
+                        respuestas mágicas...</p>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section id="contact" class="cta-section lazy-section">
+                <div class="cta-bg"
+                    data-bg="https://lh3.googleusercontent.com/aida-public/AB6AXuBgn8uP7yTLYg2BcpoyzFq9Oc5ZvUOjLQSPlgCJCTX9prOKbOWCHiEl4ueWPx3_auoT1dTz7Z1yArMAprRInox3n-omYf6QRGqaa8i9mUmpkLqQrm3fFXXjkM1XzDHE24RrA7LB-Zi8GiUo5mvwlehSyrCxBe4qnZ7YSlDQw_eRsfKnDrDuLYz8l4nGqutIJifR6V3LyZms_hQm3CuLIEduKDLpbrOF61MGhM93HmFKgd5frmEq30567KN3MP7YmUaG7puCOT9z82Y">
+                </div>
+                <div class="container cta-container">
+                    <h2 class="uppercase font-black cta-title">
+                        ¿Listo para <span class="cta-accent">Elevar</span><br>tu
+                        Marca?
+                    </h2>
+                    <p class="cta-desc">
+                        Ya sea que necesites un nuevo universo web, darle alma a tu marca o visualizaciones 3D
+                        que enamoren, en POLYMedia creamos con auténtica pasión para ti.
+                    </p>
+                    <button id="openContactModalBtn" class="btn-cta">Inicia tu Proyecto</button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div>
+                        <div class="logo-group footer-logo">
+                            <div class="logo-icon">
+                                <img src="assets/svg/logos/logotipo%20polymedia-03.svg" alt="POLYMedia" class="logo-icon-svg">
+                            </div>
+                            <img src="assets/svg/logos/logotipo%20polymedia-01.svg" alt="POLYMedia" class="logo-wordmark">
+                        </div>
+                        <p class="footer-tagline">Tu equipo incansable de creadores apasionados.
+                            Poniéndole magia a cada proyecto digital desde 2024.</p>
+                    </div>
+                    <div>
+                        <h5 class="uppercase font-bold footer-heading">
+                            Servicios</h5>
+                        <ul class="footer-list">
+                            <li><a href="#services">Rendering 3D</a></li>
+                            <li><a href="#services">Diseño Web</a></li>
+                            <li><a href="#services">Branding</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="uppercase font-bold footer-heading">
+                            Contacto</h5>
+                        <ul class="footer-list">
+                            <li><a href="https://instagram.com/polymedia.mx" target="_blank"
+                                    rel="noopener noreferrer">Instagram</a></li>
+                            <li><a href="https://linkedin.com/company/polymedia" target="_blank"
+                                    rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="mailto:hola@polymedia.mx">Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 POLYMedia. Todos los derechos reservados.</p>
+                    <div class="footer-legal">
+                        <a href="privacidad.html">Privacidad</a>
+                        <a href="privacidad.html">Términos</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal de Contacto (Glassmorphism) -->
+    <div id="contactModal" class="contact-modal" aria-hidden="true">
+        <div class="contact-modal-overlay" data-close-modal></div>
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" data-close-modal aria-label="Cerrar modal">
+                <span class="icon">close</span>
+            </button>
+            <div class="contact-modal-header">
+                <h3 class="uppercase font-black modal-title">
+                    Inicia tu <br><span class="text-primary">Proyecto</span>
+                </h3>
+                <p class="modal-subtitle">
+                    Déjanos tus datos y nos pondremos en contacto contigo a la velocidad de la luz.
+                </p>
+            </div>
+            <form class="contact-modal-form" id="projectContactForm" novalidate>
+                <div class="form-group">
+                    <label for="contactNombre">Nombre Completo</label>
+                    <input type="text" id="contactNombre" name="nombre" required placeholder="Ej. Elon Musk">
+                </div>
+                <div class="form-group">
+                    <label for="contactEmpresa">Empresa / Proyecto</label>
+                    <input type="text" id="contactEmpresa" name="empresa" placeholder="Ej. SpaceX">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group form-group--phone">
+                        <label for="contactTelefono">Número (WhatsApp / Telegram)</label>
+                        <div class="phone-input-group">
+                            <div class="country-select" id="countrySelectContainer">
+                                <div class="selected-country" id="selectedCountry">
+                                    <img src="assets/svg/flags/mx.svg" alt="MX" class="flag-icon">
+                                    <span class="country-code">+52</span>
+                                    <span class="icon icon--sm">expand_more</span>
+                                </div>
+                                <ul class="country-dropdown" id="countryDropdown">
+                                    <li data-code="+52" data-flag="mx.svg">
+                                        <img src="assets/svg/flags/mx.svg" alt="MX" class="flag-icon"> <span>México
+                                            (+52)</span>
+                                    </li>
+                                    <li data-code="+1" data-flag="us.svg">
+                                        <img src="assets/svg/flags/us.svg" alt="US" class="flag-icon"> <span>EUA /
+                                            Canadá (+1)</span>
+                                    </li>
+                                    <li data-code="+57" data-flag="co.svg">
+                                        <img src="assets/svg/flags/co.svg" alt="CO" class="flag-icon"> <span>Colombia
+                                            (+57)</span>
+                                    </li>
+                                    <li data-code="+54" data-flag="ar.svg">
+                                        <img src="assets/svg/flags/ar.svg" alt="AR" class="flag-icon"> <span>Argentina
+                                            (+54)</span>
+                                    </li>
+                                    <li data-code="+34" data-flag="es.svg">
+                                        <img src="assets/svg/flags/es.svg" alt="ES" class="flag-icon"> <span>España
+                                            (+34)</span>
+                                    </li>
+                                    <li data-code="+56" data-flag="cl.svg">
+                                        <img src="assets/svg/flags/cl.svg" alt="CL" class="flag-icon"> <span>Chile
+                                            (+56)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <input type="hidden" id="countryCodeInput" name="lada" value="+52">
+                            <input type="tel" id="contactTelefono" name="telefono" required placeholder="000 000 0000"
+                                maxlength="15" inputmode="numeric">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Correo Electrónico</label>
+                        <input type="email" id="contactEmail" name="email" required placeholder="elon@spacex.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contactServicio">Servicio de Interés Principal</label>
+                    <select id="contactServicio" name="servicio" required>
+                        <option value="" disabled selected>Selecciona una opción...</option>
+                        <option value="desarrollo_web">Desarrollo Web / Landing Page</option>
+                        <option value="app_movil">Desarrollo de App Móvil</option>
+                        <option value="branding">Branding e Identidad Corporativa</option>
+                        <option value="render_3d">Renders 3D / Arquitectura</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="contactMensaje">Breve descripción de lo que buscas</label>
+                    <textarea id="contactMensaje" name="mensaje" rows="3" required
+                        placeholder="Queremos llevar nuestra marca a Marte..."></textarea>
+                </div>
+                <div class="form-checkbox">
+                    <input type="checkbox" id="contactPrivacidad" name="privacidad" required>
+                    <label for="contactPrivacidad">
+                        He leído y acepto el <a href="privacidad.html" target="_blank"
+                            class="text-primary font-bold link-underline">Acuerdo de Privacidad</a>.
+                    </label>
+                </div>
+                <button type="submit" class="btn-submit uppercase font-black">Enviar Misión <span
+                        class="icon">rocket_launch</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Premium Alert Modal (Error Validations) -->
+    <div id="premiumAlertModal" class="premium-alert-modal" aria-hidden="true">
+        <div class="premium-alert-overlay" data-close-alert></div>
+        <div class="premium-alert-content">
+            <span class="icon premium-alert-icon">error</span>
+            <h4 class="uppercase font-black premium-alert-title">¡Espera!</h4>
+            <p id="premiumAlertMessage" class="premium-alert-message">Ups! te hace falta llenar unos datos.</p>
+            <button class="btn-alert-close" data-close-alert>Entendido</button>
+        </div>
+    </div>
+
+    <!-- Success Alert Modal (Misión Cumplida) -->
+    <div id="successAlertModal" class="premium-alert-modal success-modal" aria-hidden="true">
+        <div class="premium-alert-overlay" data-close-success></div>
+        <div class="premium-alert-content success-content">
+            <span class="icon premium-alert-icon success-icon">task_alt</span>
+            <h4 class="uppercase font-black premium-alert-title">¡Misión Cumplida!</h4>
+            <p class="premium-alert-message">¡Mensaje de la misión enviado con éxito!<br>En breve nos estaremos
+                comunicando contigo.</p>
+            <button class="btn-alert-close success-btn" data-close-success>Excelente</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

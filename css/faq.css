@@ -52,7 +52,7 @@
 
 .faq-accordion:hover .faq-question,
 .faq-accordion.active .faq-question {
-    color: var(--color-vibrant-purple);
+    color: var(--color-vibrant-blue);
 }
 
 .faq-icon {
@@ -62,7 +62,7 @@
 
 .faq-accordion.active .faq-icon {
     transform: rotate(45deg);
-    color: var(--color-vibrant-purple);
+    color: var(--color-vibrant-blue);
 }
 
 .faq-panel {
