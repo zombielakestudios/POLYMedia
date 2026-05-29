@@ -89,6 +89,9 @@
                 <a href="#contact" id="openContactModalMenuBtn" class="app-menu__link app-menu__cta" data-close-menu>
                     <span class="app-menu__text">Hablemos &nbsp;<span class="icon">arrow_forward</span></span>
                 </a>
+                <a href="#" id="openQuoteModalMenuBtn" class="app-menu__link app-menu__cta quote-cta" data-close-menu style="margin-top: 0.5rem;">
+                    <span class="app-menu__text" style="color: var(--color-vibrant-green);">Cotizar &nbsp;<span class="icon">calculate</span></span>
+                </a>
             </nav>
             <div class="app-menu__footer">
                 <span>POLY<b>Media</b></span>
@@ -301,7 +304,10 @@
                         Ya sea que necesites un nuevo universo web, darle alma a tu marca o visualizaciones 3D
                         que enamoren, en POLYMedia creamos con auténtica pasión para ti.
                     </p>
-                    <button id="openContactModalBtn" class="btn-cta">Inicia tu Proyecto</button>
+                    <div class="cta-actions" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-top: 3rem;">
+                        <button id="openContactModalBtn" class="btn-cta" style="margin-top: 0;">Inicia tu Proyecto</button>
+                        <button id="openQuoteModalBtn" class="btn-cta btn-cta--secondary" style="margin-top: 0;">Cotizador Online</button>
+                    </div>
                 </div>
             </section>
         </main>
@@ -447,6 +453,353 @@
                 </div>
                 <button type="submit" class="btn-submit uppercase font-black">Enviar Misión <span
                         class="icon">rocket_launch</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Cotización Premium (Glassmorphism & Interactive) -->
+    <div id="quoteModal" class="contact-modal quote-modal" aria-hidden="true">
+        <div class="contact-modal-overlay" data-close-modal></div>
+        <div class="contact-modal-content quote-modal-content">
+            <button class="contact-modal-close" data-close-modal aria-label="Cerrar modal">
+                <span class="icon">close</span>
+            </button>
+            <div class="contact-modal-header">
+                <h3 class="uppercase font-black modal-title">
+                    Cotizador <br><span style="color: var(--color-vibrant-green);">Online</span>
+                </h3>
+                <p class="modal-subtitle">
+                    Selecciona los servicios que necesitas para armar tu propuesta a la medida.
+                </p>
+            </div>
+            
+            <form class="contact-modal-form" id="onlineQuoteForm" novalidate>
+                <!-- Paso 1: Servicios y Entregables -->
+                <div class="quote-step-title uppercase font-black">1. Selecciona los Servicios</div>
+                
+                <div class="quote-services-container">
+                    <!-- Tarjeta Branding -->
+                    <div class="quote-card" data-service="branding">
+                        <div class="quote-card-header">
+                            <span class="icon quote-card-icon" style="color: var(--color-vibrant-purple);">brush</span>
+                            <div class="quote-card-info">
+                                <h4 class="uppercase font-black">Branding & Identidad</h4>
+                                <p>Dale alma y propósito a tu marca</p>
+                            </div>
+                        </div>
+                        <div class="quote-options-grid">
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Branding (Tier Exprés)" data-price="15000">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Branding Exprés ($15,000)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Branding (Tier Corporativa)" data-price="28000">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Branding Corp. ($28,000)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Kit de Redes Sociales" data-price="3500">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Kit Redes Sociales ($3,500)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Presentación Comercial" data-price="4500">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Presentación Com. ($4,500)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Firma de Correo" data-price="800">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Firma Correo Corp. ($800)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Papelería Básica" data-price="2500">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Papelería Básica ($2,500)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Brochure de Ventas" data-price="4000">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Brochure Ventas ($4,000)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Señalética Básica" data-price="3000">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Señalética Básica ($3,000)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="branding_options" value="Merchandising" data-price="2500">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Merchandising ($2,500)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Diseño Web -->
+                    <div class="quote-card" data-service="web">
+                        <div class="quote-card-header">
+                            <span class="icon quote-card-icon" style="color: var(--color-vibrant-blue);">desktop_windows</span>
+                            <div class="quote-card-info">
+                                <h4 class="uppercase font-black">Web & Marketing</h4>
+                                <p>Experiencias web de alta tensión</p>
+                            </div>
+                        </div>
+                        <div class="quote-options-grid">
+                            <label class="quote-option">
+                                <input type="checkbox" name="web_options" value="Landing Page" data-price="8500">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Landing Page ($8,500)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="web_options" value="Webpage Sencilla" data-price="13000">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Webpage Sencilla ($13,000)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="web_options" value="Webpage Completa" data-price="22000">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Webpage Completa ($22,000)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="web_options" value="Mantenimiento Mensual Web" data-price="500">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Mantenimiento ($500/mes)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="web_options" value="Mantenimiento RRSS" data-price="15000">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Mantenimiento RRSS ($15k/m)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="web_options" value="Producción de Creativos" data-price="4500">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">Producción Creativos ($4,500)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Renders 3D -->
+                    <div class="quote-card" data-service="renders">
+                        <div class="quote-card-header">
+                            <span class="icon quote-card-icon" style="color: var(--color-vibrant-orange);">3d_rotation</span>
+                            <div class="quote-card-info">
+                                <h4 class="uppercase font-black">Renders 3D & CGI</h4>
+                                <p>Visualizaciones fotorrealistas de lujo</p>
+                            </div>
+                        </div>
+                        <div class="quote-options-grid">
+                            <div class="quote-option-wrapper">
+                                <label class="quote-option">
+                                    <input type="checkbox" name="renders_options" value="Render Exprés" data-price="2000" data-is-variable="true" id="opt_renderexpres">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="option-text">Render Exprés ($2,000)</span>
+                                </label>
+                                <div class="quote-quantity-control" id="ctrl_opt_renderexpres">
+                                    <span class="control-qty-label">Cantidad:</span>
+                                    <div class="qty-input-group">
+                                        <button type="button" class="qty-btn" data-action="minus" data-target="opt_renderexpres_qty">remove</button>
+                                        <input type="number" id="opt_renderexpres_qty" class="qty-val" value="1" min="1" max="100">
+                                        <button type="button" class="qty-btn" data-action="plus" data-target="opt_renderexpres_qty">add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quote-option-wrapper">
+                                <label class="quote-option">
+                                    <input type="checkbox" name="renders_options" value="Render 3D Realista" data-price="4500" data-is-variable="true" id="opt_renderrealista">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="option-text">Render Realista ($4,500)</span>
+                                </label>
+                                <div class="quote-quantity-control" id="ctrl_opt_renderrealista">
+                                    <span class="control-qty-label">Cantidad:</span>
+                                    <div class="qty-input-group">
+                                        <button type="button" class="qty-btn" data-action="minus" data-target="opt_renderrealista_qty">remove</button>
+                                        <input type="number" id="opt_renderrealista_qty" class="qty-val" value="1" min="1" max="100">
+                                        <button type="button" class="qty-btn" data-action="plus" data-target="opt_renderrealista_qty">add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quote-option-wrapper">
+                                <label class="quote-option">
+                                    <input type="checkbox" name="renders_options" value="Video 3D (Animación)" data-price="300" data-is-variable="true" id="opt_video3d">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="option-text">Video 3D ($300 / seg)</span>
+                                </label>
+                                <div class="quote-quantity-control" id="ctrl_opt_video3d">
+                                    <span class="control-qty-label">Segundos:</span>
+                                    <div class="qty-input-group">
+                                        <button type="button" class="qty-btn" data-action="minus" data-target="opt_video3d_qty">remove</button>
+                                        <input type="number" id="opt_video3d_qty" class="qty-val" value="5" min="1" max="600">
+                                        <button type="button" class="qty-btn" data-action="plus" data-target="opt_video3d_qty">add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quote-option-wrapper">
+                                <label class="quote-option">
+                                    <input type="checkbox" name="renders_options" value="Modelado 3D" data-price="600" data-is-variable="true" id="opt_modelado3d">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="option-text">Modelado 3D ($600 / hr)</span>
+                                </label>
+                                <div class="quote-quantity-control" id="ctrl_opt_modelado3d">
+                                    <span class="control-qty-label">Horas:</span>
+                                    <div class="qty-input-group">
+                                        <button type="button" class="qty-btn" data-action="minus" data-target="opt_modelado3d_qty">remove</button>
+                                        <input type="number" id="opt_modelado3d_qty" class="qty-val" value="5" min="1" max="100">
+                                        <button type="button" class="qty-btn" data-action="plus" data-target="opt_modelado3d_qty">add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta IA 4K & Taller -->
+                    <div class="quote-card" data-service="apps">
+                        <div class="quote-card-header">
+                            <span class="icon quote-card-icon" style="color: var(--color-primary);">science</span>
+                            <div class="quote-card-info">
+                                <h4 class="uppercase font-black">IA 4K & Taller</h4>
+                                <p>CGI por IA y servicios de taller físico</p>
+                            </div>
+                        </div>
+                        <div class="quote-options-grid">
+                            <label class="quote-option">
+                                <input type="checkbox" name="apps_options" value="Render AI Concept" data-price="1200">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">AI Concept Render ($1,200)</span>
+                            </label>
+                            <label class="quote-option">
+                                <input type="checkbox" name="apps_options" value="Render AI Pro" data-price="2500">
+                                <span class="checkbox-custom"></span>
+                                <span class="option-text">AI Pro Render ($2,500)</span>
+                            </label>
+                            <div class="quote-option-wrapper">
+                                <label class="quote-option">
+                                    <input type="checkbox" name="apps_options" value="Video IA" data-price="250" data-is-variable="true" id="opt_videoia">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="option-text">Video por IA ($250 / seg)</span>
+                                </label>
+                                <div class="quote-quantity-control" id="ctrl_opt_videoia">
+                                    <span class="control-qty-label">Segundos:</span>
+                                    <div class="qty-input-group">
+                                        <button type="button" class="qty-btn" data-action="minus" data-target="opt_videoia_qty">remove</button>
+                                        <input type="number" id="opt_videoia_qty" class="qty-val" value="5" min="1" max="600">
+                                        <button type="button" class="qty-btn" data-action="plus" data-target="opt_videoia_qty">add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quote-option-wrapper">
+                                <label class="quote-option">
+                                    <input type="checkbox" name="apps_options" value="Grabado Láser" data-price="8" data-is-variable="true" id="opt_laser">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="option-text">Grabado Láser ($8 / min)</span>
+                                </label>
+                                <div class="quote-quantity-control" id="ctrl_opt_laser">
+                                    <span class="control-qty-label">Minutos:</span>
+                                    <div class="qty-input-group">
+                                        <button type="button" class="qty-btn" data-action="minus" data-target="opt_laser_qty">remove</button>
+                                        <input type="number" id="opt_laser_qty" class="qty-val" value="10" min="1" max="1000">
+                                        <button type="button" class="qty-btn" data-action="plus" data-target="opt_laser_qty">add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quote-option-wrapper">
+                                <label class="quote-option">
+                                    <input type="checkbox" name="apps_options" value="Corte de Vinil" data-price="200" data-is-variable="true" id="opt_vinil">
+                                    <span class="checkbox-custom"></span>
+                                    <span class="option-text">Corte Vinil ($200 / metro)</span>
+                                </label>
+                                <div class="quote-quantity-control" id="ctrl_opt_vinil">
+                                    <span class="control-qty-label">Metros:</span>
+                                    <div class="qty-input-group">
+                                        <button type="button" class="qty-btn" data-action="minus" data-target="opt_vinil_qty">remove</button>
+                                        <input type="number" id="opt_vinil_qty" class="qty-val" value="2" min="1" max="100">
+                                        <button type="button" class="qty-btn" data-action="plus" data-target="opt_vinil_qty">add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel de Total Estimado (Cyberpunk Glow) -->
+                <div class="quote-total-panel">
+                    <div class="quote-total-container">
+                        <span class="quote-total-label uppercase font-black">Total Estimado</span>
+                        <div class="quote-total-price-wrapper">
+                            <span class="quote-total-currency">MXN</span>
+                            <span class="quote-total-price" id="quoteTotalPrice">0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paso 2: Datos de Contacto -->
+                <div class="quote-step-title uppercase font-black" style="margin-top: 1.5rem;">2. Déjanos tus Datos</div>
+
+                <div class="form-group">
+                    <label for="quoteNombre">Nombre Completo</label>
+                    <input type="text" id="quoteNombre" name="nombre" required placeholder="Ej. Elon Musk">
+                </div>
+                <div class="form-group">
+                    <label for="quoteEmpresa">Empresa / Proyecto</label>
+                    <input type="text" id="quoteEmpresa" name="empresa" placeholder="Ej. SpaceX">
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group form-group--phone">
+                        <label for="quoteTelefono">Número (WhatsApp / Telegram)</label>
+                        <div class="phone-input-group">
+                            <div class="country-select" id="quoteCountrySelectContainer">
+                                <div class="selected-country" id="quoteSelectedCountry">
+                                    <img src="assets/svg/flags/mx.svg" alt="MX" class="flag-icon">
+                                    <span class="country-code">+52</span>
+                                    <span class="icon icon--sm">expand_more</span>
+                                </div>
+                                <ul class="country-dropdown" id="quoteCountryDropdown">
+                                    <li data-code="+52" data-flag="mx.svg">
+                                        <img src="assets/svg/flags/mx.svg" alt="MX" class="flag-icon"> <span>México (+52)</span>
+                                    </li>
+                                    <li data-code="+1" data-flag="us.svg">
+                                        <img src="assets/svg/flags/us.svg" alt="US" class="flag-icon"> <span>EUA / Canadá (+1)</span>
+                                    </li>
+                                    <li data-code="+57" data-flag="co.svg">
+                                        <img src="assets/svg/flags/co.svg" alt="CO" class="flag-icon"> <span>Colombia (+57)</span>
+                                    </li>
+                                    <li data-code="+54" data-flag="ar.svg">
+                                        <img src="assets/svg/flags/ar.svg" alt="AR" class="flag-icon"> <span>Argentina (+54)</span>
+                                    </li>
+                                    <li data-code="+34" data-flag="es.svg">
+                                        <img src="assets/svg/flags/es.svg" alt="ES" class="flag-icon"> <span>España (+34)</span>
+                                    </li>
+                                    <li data-code="+56" data-flag="cl.svg">
+                                        <img src="assets/svg/flags/cl.svg" alt="CL" class="flag-icon"> <span>Chile (+56)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <input type="hidden" id="quoteCountryCodeInput" name="lada" value="+52">
+                            <input type="tel" id="quoteTelefono" name="telefono" required placeholder="000 000 0000" maxlength="15" inputmode="numeric">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="quoteEmail">Correo Electrónico</label>
+                        <input type="email" id="quoteEmail" name="email" required placeholder="elon@spacex.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="quoteMensaje">Mensaje o Detalles Adicionales</label>
+                    <textarea id="quoteMensaje" name="mensaje" rows="2" placeholder="Describe brevemente tus requerimientos o el alcance..."></textarea>
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="quotePrivacidad" name="privacidad" required>
+                    <label for="quotePrivacidad">
+                        He leído y acepto el <a href="privacidad.html" target="_blank" class="text-primary font-bold link-underline">Acuerdo de Privacidad</a>.
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-submit btn-submit--quote uppercase font-black">
+                    Enviar Cotización <span class="icon">rocket_launch</span>
+                </button>
             </form>
         </div>
     </div>

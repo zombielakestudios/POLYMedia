@@ -587,6 +587,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (siteWrapper) {
         siteWrapper.addEventListener('mousedown', (e) => {
             if (e.button !== 0) return; // Solo clic izquierdo
+            // No arrastrar si hay un modal abierto
+            if (document.querySelector('.contact-modal.is-open')) return;
             // No arrastrar si el target es interactivo (links, buttons, inputs)
             const tag = e.target.tagName.toLowerCase();
             if (['a', 'button', 'input', 'textarea', 'select', 'label'].includes(tag) || e.target.closest('a, button, input, textarea, select, label')) return;
@@ -697,5 +699,410 @@ document.addEventListener('DOMContentLoaded', () => {
     // Run animation loop ONLY on non-touch devices with canvas
     if (canvas && !isTouchDevice) {
         animate();
+    }
+
+    /**
+     * ═══════════════════════════════════════════════
+     * ONLINE QUOTE MODAL (Glassmorphism & WhatsApp)
+     * ═══════════════════════════════════════════════
+     */
+    const quoteModal = document.getElementById('quoteModal');
+    const openQuoteModalBtn = document.getElementById('openQuoteModalBtn');
+    const openQuoteModalMenuBtn = document.getElementById('openQuoteModalMenuBtn');
+    const quoteForm = document.getElementById('onlineQuoteForm');
+
+    // Phone config
+    const POLYMEDIA_WHATSAPP_PHONE = '529983431102'; // Configurable WhatsApp receiver phone number
+
+    function openQuoteModal() {
+        if (!quoteModal) return;
+        ensureModalsCss();
+        quoteModal.classList.add('is-open');
+        quoteModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden'; // Block scroll
+    }
+
+    function closeQuoteModal() {
+        if (!quoteModal) return;
+        quoteModal.classList.remove('is-open');
+        quoteModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = ''; // Restore scroll
+    }
+
+    if (openQuoteModalBtn) {
+        openQuoteModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openQuoteModal();
+        });
+    }
+
+    if (openQuoteModalMenuBtn) {
+        openQuoteModalMenuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openQuoteModal();
+        });
+    }
+
+    if (quoteModal) {
+        const closeTriggers = quoteModal.querySelectorAll('[data-close-modal]');
+        closeTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                if (trigger.classList.contains('contact-modal-overlay')) {
+                    if (e.target === trigger) {
+                        closeQuoteModal();
+                    }
+                } else {
+                    closeQuoteModal();
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && quoteModal.classList.contains('is-open')) {
+                closeQuoteModal();
+            }
+        });
+    }
+
+    // Dynamic styling for checked cards, quantity toggle, and real-time total in Cotizador
+    if (quoteForm) {
+        const quoteCards = quoteForm.querySelectorAll('.quote-card');
+        const checkboxes = quoteForm.querySelectorAll('input[type="checkbox"]:not(#quotePrivacidad)');
+        
+        // Function to update the estimated total in real time
+        function updateQuoteTotal() {
+            let total = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    const price = parseFloat(cb.getAttribute('data-price')) || 0;
+                    const isVariable = cb.getAttribute('data-is-variable') === 'true';
+                    if (isVariable) {
+                        const qtyInput = document.getElementById(cb.id + '_qty');
+                        const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+                        total += price * qty;
+                    } else {
+                        total += price;
+                    }
+                }
+            });
+            
+            const totalDisplay = document.getElementById('quoteTotalPrice');
+            if (totalDisplay) {
+                totalDisplay.textContent = total.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+        }
+
+        // Initialize checkbox event listeners and state
+        checkboxes.forEach(cb => {
+            const isVariable = cb.getAttribute('data-is-variable') === 'true';
+            if (isVariable) {
+                const qtyInput = document.getElementById(cb.id + '_qty');
+                if (qtyInput && !cb.checked) {
+                    qtyInput.setAttribute('disabled', 'true');
+                }
+            }
+
+            cb.addEventListener('change', () => {
+                // Toggle quantity control visibility if variable
+                const isVariable = cb.getAttribute('data-is-variable') === 'true';
+                if (isVariable) {
+                    const qtyControl = document.getElementById(`ctrl_${cb.id}`);
+                    if (qtyControl) {
+                        if (cb.checked) {
+                            qtyControl.classList.add('is-visible');
+                            const qtyInput = document.getElementById(cb.id + '_qty');
+                            if (qtyInput) qtyInput.removeAttribute('disabled');
+                        } else {
+                            qtyControl.classList.remove('is-visible');
+                            const qtyInput = document.getElementById(cb.id + '_qty');
+                            if (qtyInput) qtyInput.setAttribute('disabled', 'true');
+                        }
+                    }
+                }
+
+                // Check card activation state (at least one checked)
+                const card = cb.closest('.quote-card');
+                if (card) {
+                    const cardCheckboxes = card.querySelectorAll('input[type="checkbox"]');
+                    const anyChecked = Array.from(cardCheckboxes).some(input => input.checked);
+                    if (anyChecked) {
+                        card.classList.add('is-active');
+                    } else {
+                        card.classList.remove('is-active');
+                    }
+                }
+
+                updateQuoteTotal();
+            });
+        });
+
+        // Set up plus/minus buttons for quantity controls
+        const qtyButtons = quoteForm.querySelectorAll('.qty-btn');
+        qtyButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const action = btn.getAttribute('data-action');
+                const targetId = btn.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+                if (input) {
+                    let val = parseInt(input.value) || 0;
+                    const min = parseInt(input.min) || 1;
+                    const max = parseInt(input.max) || 1000;
+                    
+                    if (action === 'plus') {
+                        val = Math.min(val + 1, max);
+                    } else if (action === 'minus') {
+                        val = Math.max(val - 1, min);
+                    }
+                    
+                    input.value = val;
+                    updateQuoteTotal();
+                }
+            });
+        });
+
+        // Update when user inputs a value manually inside quantity fields
+        const qtyInputs = quoteForm.querySelectorAll('.qty-val');
+        qtyInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                let val = parseInt(input.value) || 1;
+                const min = parseInt(input.min) || 1;
+                const max = parseInt(input.max) || 1000;
+                val = Math.max(min, Math.min(val, max));
+                input.value = val;
+                updateQuoteTotal();
+            });
+        });
+
+        // --- Country Selector y Validación de Teléfono Numérico ---
+        const quoteTelefonoInput = document.getElementById('quoteTelefono');
+        const quoteSelectedCountry = document.getElementById('quoteSelectedCountry');
+        const quoteCountryDropdown = document.getElementById('quoteCountryDropdown');
+        const quoteCountrySelect = document.getElementById('quoteCountrySelectContainer');
+        const quoteCountryCodeInput = document.getElementById('quoteCountryCodeInput');
+
+        if (quoteTelefonoInput) {
+            quoteTelefonoInput.addEventListener('input', function () {
+                let value = this.value.replace(/[^0-9]/g, '');
+                if (value.length > 15) {
+                    value = value.slice(0, 15);
+                }
+                this.value = value;
+            });
+        }
+
+        if (quoteSelectedCountry && quoteCountrySelect && quoteCountryDropdown) {
+            quoteSelectedCountry.addEventListener('click', (e) => {
+                e.stopPropagation();
+                quoteCountrySelect.classList.toggle('is-active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!quoteCountrySelect.contains(e.target)) {
+                    quoteCountrySelect.classList.remove('is-active');
+                }
+            });
+
+            const countryOptions = quoteCountryDropdown.querySelectorAll('li');
+            countryOptions.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const code = option.getAttribute('data-code');
+                    const flag = option.getAttribute('data-flag');
+
+                    if (quoteCountryCodeInput) quoteCountryCodeInput.value = code;
+
+                    quoteSelectedCountry.innerHTML = `
+                        <img src="assets/svg/flags/${flag}" alt="Selected Flag" class="flag-icon">
+                        <span class="country-code">${code}</span>
+                        <span class="icon" style="font-size: 1rem;">expand_more</span>
+                    `;
+
+                    quoteCountrySelect.classList.remove('is-active');
+                });
+            });
+        }
+
+        // Remover clases de error al interactuar
+        const quoteInputs = quoteForm.querySelectorAll('input, select, textarea');
+        quoteInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('input-invalid', 'checkbox-invalid');
+            });
+            input.addEventListener('change', () => {
+                input.classList.remove('input-invalid', 'checkbox-invalid');
+            });
+        });
+
+        // Form Submit
+        quoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            let hasFieldErrors = false;
+            let hasPrivacyError = false;
+
+            const requiredFields = quoteForm.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (field.type === 'checkbox') {
+                    if (!field.checked) {
+                        field.classList.add('checkbox-invalid');
+                        hasPrivacyError = true;
+                    } else {
+                        field.classList.remove('checkbox-invalid');
+                    }
+                } else {
+                    if (!field.value.trim()) {
+                        field.classList.add('input-invalid');
+                        hasFieldErrors = true;
+                    } else {
+                        field.classList.remove('input-invalid');
+                    }
+                }
+            });
+
+            if (hasFieldErrors || hasPrivacyError) {
+                if (hasFieldErrors) {
+                    openPremiumAlert('Ups! Te hace falta llenar algunos datos de contacto.');
+                } else if (hasPrivacyError) {
+                    openPremiumAlert('Ups! No has aceptado nuestro acuerdo de privacidad.');
+                }
+                return;
+            }
+
+            // Validar que al menos una opción esté seleccionada
+            const selectedOptions = quoteForm.querySelectorAll('input[type="checkbox"]:checked:not(#quotePrivacidad)');
+            if (selectedOptions.length === 0) {
+                openPremiumAlert('Por favor selecciona al menos un servicio o entregable de interés.');
+                return;
+            }
+
+            // Recopilar selección por servicio con desglose de precios y cantidades
+            let brandingSelected = [];
+            let webSelected = [];
+            let rendersSelected = [];
+            let appsSelected = [];
+            let grandTotal = 0;
+
+            selectedOptions.forEach(cb => {
+                const price = parseFloat(cb.getAttribute('data-price')) || 0;
+                const name = cb.value;
+                const isVariable = cb.getAttribute('data-is-variable') === 'true';
+                let itemTotal = price;
+                let detailsText = '';
+
+                if (isVariable) {
+                    const qtyInput = document.getElementById(cb.id + '_qty');
+                    const qty = qtyInput ? (parseInt(qtyInput.value) || 1) : 1;
+                    itemTotal = price * qty;
+                    
+                    let unit = 'seg';
+                    if (cb.id.includes('modelado')) unit = 'hrs';
+                    if (cb.id.includes('laser')) unit = 'min';
+                    if (cb.id.includes('vinil')) unit = 'm';
+                    if (cb.id.includes('expres') || cb.id.includes('realista')) unit = 'renders';
+                    
+                    detailsText = ` (${qty} ${unit} × $${price.toLocaleString('es-MX')})`;
+                } else {
+                    detailsText = ` ($${price.toLocaleString('es-MX')})`;
+                }
+
+                grandTotal += itemTotal;
+                const line = `  • ${name}${detailsText} = *$${itemTotal.toLocaleString('es-MX')}*`;
+
+                if (cb.name === 'branding_options') {
+                    brandingSelected.push(line);
+                } else if (cb.name === 'web_options') {
+                    webSelected.push(line);
+                } else if (cb.name === 'renders_options') {
+                    rendersSelected.push(line);
+                } else if (cb.name === 'apps_options') {
+                    appsSelected.push(line);
+                }
+            });
+
+            // Obtener datos del cliente
+            const name = document.getElementById('quoteNombre').value.trim();
+            const company = document.getElementById('quoteEmpresa').value.trim() || 'No especificada';
+            const phoneCode = quoteCountryCodeInput ? quoteCountryCodeInput.value : '+52';
+            const phoneNum = document.getElementById('quoteTelefono').value.trim();
+            const email = document.getElementById('quoteEmail').value.trim();
+            const notes = document.getElementById('quoteMensaje').value.trim() || 'Sin notas adicionales';
+
+            // Formatear mensaje para WhatsApp
+            let msg = `🔥 *NUEVA COTIZACIÓN ONLINE* 🔥\n\n`;
+            msg += `👤 *Cliente:* ${name}\n`;
+            msg += `🏢 *Empresa/Proyecto:* ${company}\n`;
+            msg += `📧 *Correo:* ${email}\n`;
+            msg += `📱 *Teléfono:* ${phoneCode} ${phoneNum}\n\n`;
+            msg += `🛠️ *Desglose de Propuesta:*\n`;
+
+            if (brandingSelected.length > 0) {
+                msg += `\n🎨 *BRANDING & IDENTIDAD:*\n` + brandingSelected.join('\n') + `\n`;
+            }
+            if (webSelected.length > 0) {
+                msg += `\n💻 *WEB & MARKETING:*\n` + webSelected.join('\n') + `\n`;
+            }
+            if (rendersSelected.length > 0) {
+                msg += `\n📐 *RENDERS 3D & CGI:*\n` + rendersSelected.join('\n') + `\n`;
+            }
+            if (appsSelected.length > 0) {
+                msg += `\n🤖 *IA 4K & TALLER:*\n` + appsSelected.join('\n') + `\n`;
+            }
+
+            msg += `\n💵 *TOTAL ESTIMADO:* *$${grandTotal.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN*\n\n`;
+            msg += `💬 *Mensaje del Cliente:*\n_${notes}_\n\n`;
+            msg += `--- \n_Generado en Cotizador Online POLYMedia_`;
+
+            // Simulación e interacción con el botón
+            const submitBtn = quoteForm.querySelector('.btn-submit');
+            const originalHTML = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = 'Conectando a WhatsApp... <span class="icon">sync</span>';
+            submitBtn.style.pointerEvents = 'none';
+
+            setTimeout(() => {
+                submitBtn.innerHTML = 'Enviado con éxito <span class="icon">check_circle</span>';
+                submitBtn.style.background = '#ccff00'; // Lime green
+                submitBtn.style.color = '#000';
+
+                // Lanzar enlace de WhatsApp
+                const encodedMsg = encodeURIComponent(msg);
+                const waUrl = `https://wa.me/${POLYMEDIA_WHATSAPP_PHONE}?text=${encodedMsg}`;
+                window.open(waUrl, '_blank');
+
+                setTimeout(() => {
+                    closeQuoteModal();
+                    quoteForm.reset();
+                    
+                    // Quitar iluminación a las tarjetas y resetear total a 0
+                    const quoteCards = quoteForm.querySelectorAll('.quote-card');
+                    quoteCards.forEach(c => c.classList.remove('is-active'));
+                    
+                    const totalDisplay = document.getElementById('quoteTotalPrice');
+                    if (totalDisplay) totalDisplay.textContent = '0.00';
+
+                    // Ocultar sub-controles de cantidad y deshabilitar sus inputs
+                    const qtyControls = quoteForm.querySelectorAll('.quote-quantity-control');
+                    qtyControls.forEach(ctrl => ctrl.classList.remove('is-visible'));
+                    
+                    const qtyVals = quoteForm.querySelectorAll('.qty-val');
+                    qtyVals.forEach(input => input.setAttribute('disabled', 'true'));
+
+                    // Restaurar flag de país
+                    if (quoteSelectedCountry) {
+                        quoteSelectedCountry.innerHTML = `
+                            <img src="assets/svg/flags/mx.svg" alt="MX" class="flag-icon">
+                            <span class="country-code">+52</span>
+                            <span class="icon icon--sm">expand_more</span>
+                        `;
+                    }
+                    if (quoteCountryCodeInput) quoteCountryCodeInput.value = '+52';
+
+                    // Restaurar botón
+                    submitBtn.innerHTML = originalHTML;
+                    submitBtn.style = '';
+                }, 2000);
+            }, 1200);
+        });
     }
 });
